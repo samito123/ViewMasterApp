@@ -1,0 +1,62 @@
+page-lista-pacientes {
+
+	.background-pacientes{
+		//background-color: #174361;
+		background-image: url('../assets/wallpapers/eye.png');
+	}
+
+	.buttom-menu{
+		background-color: #092a40;
+		border-radius: 4px;
+	}
+
+	.menu-img{
+		max-width: 2em;
+		margin: 0;
+	}
+
+	.menu-icon{
+		font-size: 1.7em;
+	}
+
+	.div-pesquisar{
+		width: 100%;
+		height: 3em;
+	}
+
+	.input-login{
+		width: 80%;	
+		height: 100%;
+		float: left;
+	  	margin: 0 0 1em 0;
+	  	background-color: #2b3d53;
+	  	color: white;
+	}
+
+	.pesquisar-icon{
+		width: 20%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		border-radius: 0;
+		//display: block;
+		float: left;
+		background-color: #2b3d53;
+	}
+
+	.item{
+		margin: 0 0 1em 0;
+		border-radius: 4px;
+		background-color: #e1e9f4;
+	}
+
+	.link-sem-decoracao:link { 
+		text-decoration:none; 
+		color: black;
+	}
+
+	.link-sem-decoracao:visited {
+	    text-decoration:none; 
+		color: black;
+	} 
+}

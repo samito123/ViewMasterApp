@@ -3,12 +3,12 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { PrincipalPage } from '../pages/principal/principal'
+import { LeftMenuPage } from '../pages/leftMenu/leftMenu'
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = PrincipalPage;
+  rootPage:any = LeftMenuPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

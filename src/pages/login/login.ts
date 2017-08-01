@@ -6,7 +6,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
-import { PacientesPage } from '../pacientes/pacientes';
+//import { PacientesPage } from '../tabs/pacientes/pacientes';
+import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
 
 @Component({
 	selector: 'page-login',
@@ -78,11 +79,11 @@ export class LoginPage {
 		sessionStorage.setItem('usuarioLogado', JSON.stringify(this.usuarioRetornado));
 		this.EncerraLoading();
 		this.events.publish('SetDadosUsuarioMenu');
-		this.RedirecionaParaClips();
+		this.RedirecionaParaListaDePacientes();
 	}
 
-	RedirecionaParaClips(){
-  		this.navCtrl.setRoot(PacientesPage);
+	RedirecionaParaListaDePacientes(){
+  		this.navCtrl.setRoot(ListaPacientesPage);
   	}
 
 	InicializarLoading() { 

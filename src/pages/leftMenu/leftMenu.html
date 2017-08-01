@@ -1,0 +1,99 @@
+<ion-menu [content]="conteudo">
+	<ion-content class="conteudo">
+
+		<div text-center>	
+			<img class="img-perfil" src="{{imagem}}"> 
+			<p class="titulo">{{nome}}</p>
+			<p class="sub-titulo">{{sobrenome}}</p>
+		</div>
+
+		<ion-list>
+			<div class="borda-item" *ngIf="agendaAtivo;" >
+				<ion-item class="item-menu-ativo" menuClose no-lines color="iconeMenuAtivo">
+					<ion-icon name="ios-bookmarks" color="light" item-start></ion-icon>
+					Agenda
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="!agendaAtivo;">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu">
+					<ion-icon name="ios-bookmarks" color="iconeMenu" item-start></ion-icon>
+					Agenda
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="pacientesAtivo;">
+				<ion-item  class="item-menu-ativo" menuClose no-lines color="iconeMenuAtivo">
+					<ion-icon name="ios-people" color="light" item-start></ion-icon>
+					Pacientes
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="!pacientesAtivo;">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu">
+					<ion-icon name="ios-people" color="iconeMenu" item-start></ion-icon>
+					Pacientes
+				</ion-item>
+			</div>
+
+			<div class="borda-item" *ngIf="perfilAtivo;">
+				<ion-item  class="item-menu-ativo" menuClose no-lines color="iconeMenuAtivo">
+					<ion-icon name="ios-contact" color="light" item-start></ion-icon>
+					Perfil
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="!perfilAtivo;">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu">
+					<ion-icon name="ios-contact" color="iconeMenu" item-start></ion-icon>
+					Perfil
+				</ion-item>
+			</div>
+
+			<div class="borda-item" *ngIf="subUsuariosAtivo;">
+				<ion-item  class="item-menu-ativo" menuClose no-lines color="iconeMenuAtivo">
+					<ion-icon name="ios-contacts" color="light" item-start></ion-icon>
+					Sub-Usuários
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="!subUsuariosAtivo;">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu">
+					<ion-icon name="ios-contacts" color="iconeMenu" item-start></ion-icon>
+					Sub-Usuários
+				</ion-item>
+			</div>
+
+			<div class="borda-item" *ngIf="configuracoesAtivo;">
+				<ion-item  class="item-menu-ativo" menuClose no-lines color="iconeMenuAtivo">
+					<ion-icon name="md-settings" color="light" item-start></ion-icon>
+					Configurações
+				</ion-item>
+			</div>
+			<div class="borda-item" *ngIf="!configuracoesAtivo;">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu">
+					<ion-icon name="md-settings" color="iconeMenu" item-start></ion-icon>
+					Configurações
+				</ion-item>
+			</div>
+
+			<div class="borda-ultimo-item">
+				<ion-item class="item-menu" menuClose no-lines color="leftMenu"
+				(click)="LogoutUsuario()">
+					<ion-icon name="md-exit" color="iconeMenu" item-start></ion-icon>
+					Logout
+				</ion-item>
+			</div>
+			
+		</ion-list>
+
+	  <!--<button menuClose ion-item icon-left color="menu">
+	    <ion-icon name="logo-youtube"> Clips</ion-icon>
+	  </button>
+	  <button menuClose ion-item icon-left color="menu">
+	    <ion-icon name="videocam"> Videos</ion-icon>
+	  </button>
+	  <button menuClose ion-item icon-left color="menu"
+	  (click)="LogoutUsuario()">
+	    <ion-icon name="md-exit"> Logout</ion-icon>
+	  </button>-->
+
+	</ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #conteudo></ion-nav>

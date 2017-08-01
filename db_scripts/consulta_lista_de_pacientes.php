@@ -5,10 +5,10 @@
   $angular_http_params = (array)json_decode(trim(file_get_contents('php://input')));
 
   $usuario = $angular_http_params["usuario"];
-  $senha = $angular_http_params["senha"];
-  $banco = $angular_http_params["banco"];
-  $loginUsuario = $angular_http_params["loginUsuario"];
-  $senhaUsuario = md5($angular_http_params["senhaUsuario"]);
+  $senha= $angular_http_params["senha"];
+  $banco= $angular_http_params["banco"];
+  $offset= $angular_http_params["offset"];
+  $limit= $angular_http_params["limit"];
 
   $conexao = new mysqli('localhost',$usuario, $senha, $banco);
   $conexao->autocommit(FALSE);
@@ -19,28 +19,35 @@
 
   try{
     $erro_query = 0;
-
-    $sql1="select id, imagem_perfil, 
-     nome, sobrenome
-     from tb_usuarios 
-     where login = '$loginUsuario' 
-     and senha = '$senhaUsuario'";
+    $sql;
+    if($limit == false){
+      $sql="select id, imagem_paciente, nome, 
+      telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
+      from tb_pacientes
+      order by nome asc
+      limit 20 offset $offset";
+    }else{
+      $sql="select id, imagem_paciente, nome, 
+      telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
+      from tb_pacientes
+      order by nome asc
+      limit 0, $offset";
+    }
+    
 
     $return_array_json = array();
-    $result = $conexao->query($sql1);
+    $result = $conexao->query($sql);
     while($dados = $result->fetch_assoc())
     {
-      $row_array['id'] = $dados['id']; 
-      $row_array['imagem_perfil'] = $dados['imagem_perfil']; 
+      $row_array['id'] = $dados['id'];
+      $row_array['imagem_paciente'] = $dados['imagem_paciente'];
       $row_array['nome'] = $dados['nome'];
-      $row_array['sobrenome'] = $dados['sobrenome'];
-      
+      $row_array['telefone'] = $dados['telefone'];    
+      $row_array['idade'] = $dados['idade'];
+  
       array_push($return_array_json,$row_array);
     }
     mysqli_free_result($result);
-    
-    if (!mysqli_query($conexao, $sql1)) $erro_query++;
-  
     if ($erro_query == 0){
       mysqli_commit($conexao);
       echo json_encode($return_array_json);

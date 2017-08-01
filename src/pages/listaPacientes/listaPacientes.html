@@ -1,0 +1,49 @@
+<ion-header>
+	<ion-navbar color="menu">
+	    
+	    <ion-buttons left>
+			<button class="buttom-menu" menuToggle ion-button>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+	    </ion-buttons>
+	    <ion-buttons right>
+        	<button ion-button (click)="AbrirCampoDePesquisa()">
+        		<ion-icon class="menu-icon" name="ios-search" color="light"></ion-icon>  
+        	</button>    
+	    </ion-buttons>
+	    <ion-buttons right>
+        	<button ion-button (click)="AbrirModalNovoPaciente()">
+        		<ion-icon class="menu-icon" name="ios-add-circle-outline" color="light"></ion-icon>  
+        	</button>    
+	    </ion-buttons>
+	    <ion-title>
+	      <p>{{titulo}}</p>
+	    </ion-title>
+
+  	</ion-navbar>
+</ion-header>
+
+<ion-content class="background-pacientes">
+	<div class="div-pesquisar">
+		<ion-input class="input-login" placeholder="Procurar..." clearInput name="login">
+			{{prucurar}}
+		</ion-input>
+		<button class="pesquisar-icon" ion-button (click)="aaa()">
+			<ion-icon name="ios-search" color="light" item-right></ion-icon>
+		</button>
+	</div>
+	<div padding>
+		<ion-list *ngFor="let paciente of listaDePacientes">
+			<ion-item class="item">
+				<a class="link-sem-decoracao" href="#" (click)="VisualizarPaciente(paciente.id)">
+					<h2>{{paciente.nome}}</h2>
+					<p>Fone: {{paciente.telefone}}</p>
+					<p>Idade: {{paciente.idade}} anos</p>
+				</a>
+				<ion-thumbnail item-end>
+					<img src="{{paciente.imagem_paciente}}">
+				</ion-thumbnail>
+			</ion-item>
+		</ion-list>
+	</div>
+</ion-content>
