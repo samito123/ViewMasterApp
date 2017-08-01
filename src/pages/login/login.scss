@@ -1,0 +1,49 @@
+page-login {
+
+	.background-login {
+		background-color: #009a9a;
+	  	background-size: 100% 100%;
+	}
+
+	.logo{
+		max-width: 18em;
+	}
+
+	.box-login{  
+		font-family: serif;
+		background-color: #2b3d53;
+		color: white;
+		border-color:#cfcbcb;
+		border-radius: 14px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	@media all and (min-width: 900px) { 
+		.box-login{  
+			width: 70%;
+			margin: 0 15% 0 15%;
+		} 
+	}
+    
+	.input-login{	
+	  	margin: 1em 1.5% 0 1.5%;
+	  	background-color: #2b3d53;
+	  	color: white;
+	}
+
+	.input-senha{
+	  	margin: 1em 1.5% 0 1.5%;
+	  	background-color: #2b3d53;
+	  	color: white;
+	}
+
+	.btn-logar{
+	  	margin: 1em 0 0 0;
+	}
+
+	.btn-recuperar-senha{
+	  	margin: 0 0 0 0;
+	  	color: white;
+	}
+
+}

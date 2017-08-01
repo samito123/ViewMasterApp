@@ -1,0 +1,45 @@
+page-principal {
+
+	.conteudo{
+		background-color: #49545a;
+	}
+
+	.img-perfil{
+	    //filter: brightness(70%);
+	    width: 9em;
+	    height: 9em;
+	    margin: 1em 0 0 0;
+
+	    -webkit-border-radius: 50%;
+    	border-radius: 50%;
+	}
+
+	.titulo{
+		color: white;
+		font-size: 1.5em;
+		margin: 0.2em 0 0 0;
+	}
+
+	.sub-titulo{
+		color: white;
+		font-size: 1.1em;
+		margin: 0 0 1em 0;
+	}
+
+	.borda-item{
+		border-top: 1px solid #a6b8c2;
+	}
+
+	.borda-ultimo-item{
+		border-top: 1px solid #a6b8c2;
+		border-bottom: 1px solid #a6b8c2;
+	}
+
+	.item-menu{
+		color: #a6b8c2;
+	}
+
+	.item-menu-ativo{
+		color: #f4f4f4;
+	}
+}

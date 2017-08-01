@@ -1,0 +1,40 @@
+<ion-header>
+</ion-header>
+
+<ion-content padding class="background-login">
+	<div text-center>
+		<img class="logo" src="../../assets/icon/logo.png">
+	</div>
+	
+	<div text-center class="box-login">
+		<form (ngSubmit)="LogarUsuario()" ngNativeValidate>
+	      <ion-list inset>
+		      <ion-item class="input-login">
+		        <ion-input placeholder="Login" clearInput required
+		        [(ngModel)]="usuarioForm.login" name="login">
+		        	{{inputLogin}}
+	        	</ion-input>
+		        <ion-icon name="ios-person" color="light" item-right></ion-icon>
+		      </ion-item>
+		      <ion-item class="input-senha">
+		        <ion-input placeholder="Senha" type="password" 
+		        clearInput required [(ngModel)]="usuarioForm.senha" 
+		        name="senha">
+		        	{{inputSenha}}
+	        	</ion-input>
+		        <ion-icon name="ios-lock" color="light" item-right></ion-icon>
+		      </ion-item>
+		      <div text-center class="btn-logar">
+		        <button type="submit" color="appSecondary" clear ion-button>
+		        	Logar
+	        	</button>
+		      </div>
+	      </ion-list>
+	    </form>
+ 	</div>
+ 	<div text-center>
+		<button type="submit" color="appPrimary" clear ion-button>
+	    	Recuperar senha
+		</button>
+	</div>
+</ion-content>
