@@ -1,22 +1,12 @@
 page-lista-pacientes {
 
+	.menu{
+		max-height: 2.5em;
+	}
+
 	.background-pacientes{
 		//background-color: #174361;
 		background-image: url('../assets/wallpapers/eye.png');
-	}
-
-	.buttom-menu{
-		background-color: #092a40;
-		border-radius: 4px;
-	}
-
-	.menu-img{
-		max-width: 2em;
-		margin: 0;
-	}
-
-	.menu-icon{
-		font-size: 1.7em;
 	}
 
 	.div-pesquisar{
@@ -29,19 +19,87 @@ page-lista-pacientes {
 		height: 100%;
 		float: left;
 	  	margin: 0 0 1em 0;
-	  	background-color: #2b3d53;
+	  	background-color: #2b476a;
 	  	color: white;
 	}
 
-	.pesquisar-icon{
-		width: 20%;
+	.botao-limpar{
+		width: 10%;
 		height: 100%;
 		margin: 0;
 		padding: 0;
 		border-radius: 0;
-		//display: block;
 		float: left;
-		background-color: #2b3d53;
+		background-color: #2b476a;
+	}
+
+	.botao-pesquisar{
+		width: 10%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		border-radius: 0;
+		float: left;
+		background-color: #2b476a;
+	}
+
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+
+	.fade-in {
+		opacity: 0;
+		animation: fadeIn .5s ease-in 1 forwards;
+
+		position: fixed;
+		top:0;
+		left:0;
+		z-index: 9999;
+		width: 100%;
+		height:auto; 
+		min-height:100%;
+		background: #000000;
+		opacity: 0.95;
+		display: none;
+	}
+
+	.is-paused {
+		animation-play-state: paused;
+	}
+
+	.buttom-close{
+		width: 1em;
+		height: 1em;
+		position:absolute;
+		top:50%;
+		left:50%;
+		margin-top: -6.5em;
+		margin-left: 5.5em;
+		font-size: 2em;
+		color: #a50001;
+	}
+
+	.div-center{
+		max-width: 27em;
+		max-height: 27em;
+		position: absolute;
+		top: 48%;
+		left: 50%;
+		margin-top: -13.5em;
+		margin-left: -13.5em;
+	}
+
+	.img-usuario{
+		width: 27em;
+		height: 27em;
+	}
+
+	.img-usuario-mensagem{
+		color: white; 
+		font-size: 0.8em;
+		text-align: center;
 	}
 
 	.item{
@@ -59,4 +117,5 @@ page-lista-pacientes {
 	    text-decoration:none; 
 		color: black;
 	} 
+
 }

@@ -7,7 +7,8 @@ import { AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
 //import { PacientesPage } from '../tabs/pacientes/pacientes';
-import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
+//import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
+import { TabListaAddPacientesPage } from '../tabs/tabListaAddPacientes/tabListaAddPacientes';
 
 @Component({
 	selector: 'page-login',
@@ -83,7 +84,7 @@ export class LoginPage {
 	}
 
 	RedirecionaParaListaDePacientes(){
-  		this.navCtrl.setRoot(ListaPacientesPage);
+  		this.navCtrl.setRoot(TabListaAddPacientesPage);
   	}
 
 	InicializarLoading() { 

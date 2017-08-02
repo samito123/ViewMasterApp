@@ -7,6 +7,7 @@
   $usuario = $angular_http_params["usuario"];
   $senha= $angular_http_params["senha"];
   $banco= $angular_http_params["banco"];
+  $pesquisar= $angular_http_params["pesquisar"];
   $offset= $angular_http_params["offset"];
   $limit= $angular_http_params["limit"];
 
@@ -24,12 +25,16 @@
       $sql="select id, imagem_paciente, nome, 
       telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
       from tb_pacientes
+      where ((nome LIKE '%$pesquisar%')
+      or (telefone LIKE '%$pesquisar%'))
       order by nome asc
       limit 20 offset $offset";
     }else{
       $sql="select id, imagem_paciente, nome, 
       telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
       from tb_pacientes
+      where ((nome LIKE '%$pesquisar%')
+      or (telefone LIKE '%$pesquisar%'))
       order by nome asc
       limit 0, $offset";
     }

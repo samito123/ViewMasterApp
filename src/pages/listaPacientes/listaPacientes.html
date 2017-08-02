@@ -1,35 +1,28 @@
 <ion-header>
-	<ion-navbar color="menu">
-	    
-	    <ion-buttons left>
-			<button class="buttom-menu" menuToggle ion-button>
-				<ion-icon name="menu"></ion-icon>
-			</button>
-	    </ion-buttons>
-	    <ion-buttons right>
-        	<button ion-button (click)="AbrirCampoDePesquisa()">
-        		<ion-icon class="menu-icon" name="ios-search" color="light"></ion-icon>  
-        	</button>    
-	    </ion-buttons>
-	    <ion-buttons right>
-        	<button ion-button (click)="AbrirModalNovoPaciente()">
-        		<ion-icon class="menu-icon" name="ios-add-circle-outline" color="light"></ion-icon>  
-        	</button>    
-	    </ion-buttons>
-	    <ion-title>
-	      <p>{{titulo}}</p>
-	    </ion-title>
-
+	<ion-navbar class="menu" color="menu">
   	</ion-navbar>
 </ion-header>
 
 <ion-content class="background-pacientes">
+	<div class='divImagemExpandidaClips fade-in is-paused' 
+	(click)="FecharImagemExpandida()">
+		<div class="div-center">
+			<img class="img-usuario" src="{{imagemExpandida}}" />
+			<p class="img-usuario-mensagem">
+				Toque para fechar
+			</p>
+		</div>
+	</div>
+
 	<div class="div-pesquisar">
-		<ion-input class="input-login" placeholder="Procurar..." clearInput name="login">
-			{{prucurar}}
+		<ion-input class="input-login" placeholder="Buscar por..." 
+		name="login" [(ngModel)]="pesquisar">
 		</ion-input>
-		<button class="pesquisar-icon" ion-button (click)="aaa()">
-			<ion-icon name="ios-search" color="light" item-right></ion-icon>
+		<button class="botao-limpar" ion-button (click)="LimparCampoDePesquisa()">
+			<ion-icon name="ios-close" color="light"></ion-icon>
+		</button>
+		<button class="botao-pesquisar" ion-button (click)="BuscarPacientesPorFiltro()">
+			<ion-icon name="ios-search" color="light"></ion-icon>
 		</button>
 	</div>
 	<div padding>
@@ -37,12 +30,15 @@
 			<ion-item class="item">
 				<a class="link-sem-decoracao" href="#" (click)="VisualizarPaciente(paciente.id)">
 					<h2>{{paciente.nome}}</h2>
-					<p>Fone: {{paciente.telefone}}</p>
+					<p>Contato: {{paciente.telefone}}</p>
 					<p>Idade: {{paciente.idade}} anos</p>
 				</a>
-				<ion-thumbnail item-end>
-					<img src="{{paciente.imagem_paciente}}">
-				</ion-thumbnail>
+					<ion-thumbnail item-end>
+						<a class="link-sem-decoracao" 
+						(click)="ExpandirImagem(paciente.imagem_paciente)">
+							<img src="{{paciente.imagem_paciente}}">
+						</a>
+					</ion-thumbnail>
 			</ion-item>
 		</ion-list>
 	</div>

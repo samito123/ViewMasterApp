@@ -5,7 +5,8 @@ import { Events } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 //import { PacientesPage } from '../tabs/pacientes/pacientes';
-import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
+//import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
+import { TabListaAddPacientesPage } from '../tabs/tabListaAddPacientes/tabListaAddPacientes';
 
 @Component({
 	selector: 'page-left-menu',
@@ -40,7 +41,7 @@ export class LeftMenuPage {
 			this.rootPage = LoginPage;
 		}else{
 			this.SetDadosUsuarioMenu();
-			this.rootPage = ListaPacientesPage;
+			this.rootPage = TabListaAddPacientesPage;
 		}
 	}
 

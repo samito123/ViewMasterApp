@@ -10,8 +10,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class ListaPacientesPage {
 
-	titulo;
+	pesquisar;
 	listaDePacientes = [];
+	imagemExpandida;
 	offset = 0;
 
 	url = 'http://br400.teste.website/~appot240/view_master_app/';
@@ -19,8 +20,6 @@ export class ListaPacientesPage {
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
 		public http: Http) {
-		
-		this.titulo = "Pacientes";
 		this.CarregaLista();
 	}
 
@@ -36,7 +35,7 @@ export class ListaPacientesPage {
 	 
 	    let postParams = {
 			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
-			offset: this.offset, limit: false
+			pesquisar: this.pesquisar, offset: this.offset, limit: false
 	    }
 	    
 		this.http.post(this.url+'pacientes/consulta_lista_de_pacientes.php', postParams, options)
@@ -53,16 +52,49 @@ export class ListaPacientesPage {
 		console.log(id);
 	}
 
-	AbrirCampoDePesquisa(){
-		console.log("Abriu");
+	LimparCampoDePesquisa(){
+		this.pesquisar = "";
 	}
 
-	AbrirModalNovoPaciente(){
-		console.log("AbriuModal");
+	BuscarPacientesPorFiltro(){
+		this.InicializarLoading();
+		this.offset = 0;
+		this.listaDePacientes = [];
+		console.log(this.pesquisar);
+		this.BuscaListaDePacientes();
 	}
 
-	aaa(){
-		console.log("Pesquisou");
+	ExpandirImagem(imagem){
+		this.imagemExpandida = imagem;
+		this.FadeIn(document.querySelector(
+			'.divImagemExpandidaClips'), "inline-block");
+	}
+
+	FecharImagemExpandida(){
+		this.FadeOut(document.querySelector('.divImagemExpandidaClips'));
+	}
+
+	FadeOut(elemento){
+		elemento.style.opacity = 1;
+		(function fade() {
+			if ((elemento.style.opacity -= .1) < 0) {
+				elemento.style.display = "none";
+			} else {
+				requestAnimationFrame(fade);
+			}
+		})();
+	}
+
+	FadeIn(elemento, display){
+		elemento.style.opacity = 0;
+		elemento.style.display = display || "block";
+		(function fade() {
+			var val = parseFloat(elemento.style.opacity);
+			if (!((val += .1) > 1)) {
+				elemento.style.opacity = val;
+				requestAnimationFrame(fade);
+			}
+		})();
 	}
 
 	InicializarLoading() { 

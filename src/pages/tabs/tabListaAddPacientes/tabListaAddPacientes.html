@@ -1,0 +1,19 @@
+<ion-header>
+	<ion-navbar class="menu" color="menu">  
+	    <ion-buttons left>
+			<button class="buttom-menu" menuToggle ion-button>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+	    </ion-buttons>
+	    <ion-title>
+	      <p>{{titulo}}</p>
+	    </ion-title>
+  	</ion-navbar>
+</ion-header>
+
+<ion-tabs [selectedIndex]="1" color="menu">
+	<ion-tab [root]="tab1" tabIcon="ios-people" 
+	[rootParams]="clip" tabTitle="Pacientes"></ion-tab>
+	<ion-tab [root]="tab2" tabIcon="ios-clipboard" 
+	[rootParams]="clip" tabTitle="Adicionar"></ion-tab>
+</ion-tabs>

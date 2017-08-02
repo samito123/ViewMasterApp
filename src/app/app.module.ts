@@ -9,16 +9,20 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { LeftMenuPage } from '../pages/leftMenu/leftMenu';
+import { TabListaAddPacientesPage } from '../pages/tabs/tabListaAddPacientes/tabListaAddPacientes';
 import { PacientesPage } from '../pages/tabs/pacientes/pacientes';
 import { ListaPacientesPage } from '../pages/listaPacientes/listaPacientes';
+import { AdicionarPacientesPage } from '../pages/adicionarPacientes/adicionarPacientes';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     LeftMenuPage,
+    TabListaAddPacientesPage,
     PacientesPage,
-    ListaPacientesPage
+    ListaPacientesPage,
+    AdicionarPacientesPage
   ],
   imports: [
     BrowserModule,
@@ -30,8 +34,10 @@ import { ListaPacientesPage } from '../pages/listaPacientes/listaPacientes';
     MyApp,
     LoginPage,
     LeftMenuPage,
+    TabListaAddPacientesPage,
     PacientesPage,
-    ListaPacientesPage
+    ListaPacientesPage,
+    AdicionarPacientesPage
   ],
   providers: [
     StatusBar,
