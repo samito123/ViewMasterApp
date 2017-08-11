@@ -67,11 +67,11 @@ export class ListaPacientesPage {
 	ExpandirImagem(imagem){
 		this.imagemExpandida = imagem;
 		this.FadeIn(document.querySelector(
-			'.divImagemExpandidaClips'), "inline-block");
+			'.divImagemExpandidaPacientes'), "inline-block");
 	}
 
 	FecharImagemExpandida(){
-		this.FadeOut(document.querySelector('.divImagemExpandidaClips'));
+		this.FadeOut(document.querySelector('.divImagemExpandidaPacientes'));
 	}
 
 	FadeOut(elemento){

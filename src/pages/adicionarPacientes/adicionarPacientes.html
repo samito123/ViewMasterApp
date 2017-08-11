@@ -4,48 +4,194 @@
 </ion-header>
 
 <ion-content class="background-pacientes">
+
 	<div class="div-adicionar-paciente">
-		
 
-		<form padding (ngSubmit)="LogarUsuario()" ngNativeValidate>
-
-			<div>
-				<h3>Dados Pessoais</h3>
-			</div>
+		<form (ngSubmit)="SalvarPaciente()" ngNativeValidate>
 			
-			<div class="div-input">
-				<ion-input class="input" type="text" placeholder="Nome" required
-				[(ngModel)]="pacienteForm.nome" name="nome">
-				</ion-input>
-				<button type="button" class="botao-limpar" 
-				(click)="LimparCampoForm('nome')">
-					<ion-icon name="ios-close" color="light"></ion-icon>
-				</button>
+			<h3 class="div-titulo-topo">Dados Pessoais</h3>
+
+			<div padding>
+				
+				<div text-center>	
+					<div>
+						<img class="img-perfil-paciente" src="{{imagemPaciente}}"
+						(click)="TirarFoto()"> 
+					</div>
+					<div>
+						<button type="button" class="botao-limpar-img" 
+						(click)="LimparImagem()">
+							<ion-icon name="ios-close" color="light"></ion-icon>
+						</button>
+					</div>
+				</div>
+				
+				<div class="div-input">
+					<p class="titulo-input">Nome:</p>
+					<ion-input class="input" type="text" required maxlength="150"
+					placeholder="Exemplo: Luiz Samuel"
+					[(ngModel)]="pacienteForm.nome" name="nome"
+					(ionBlur)="FormataNomes('nome',pacienteForm.nome)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('nome')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Sobrenome:</p>
+					<ion-input class="input" type="text" required maxlength="150"
+					placeholder="Exemplo: Pinheiro Lima"
+					[(ngModel)]="pacienteForm.sobrenome" name="sobrenome"
+					(ionBlur)="FormataNomes('sobrenome',pacienteForm.sobrenome)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('sobrenome')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Telefone:</p>
+					<ion-input class="input" type="text"
+					placeholder="Exemplo: (85) 99804-4058"
+					[(ngModel)]="pacienteForm.telefone" name="telefone" maxlength="15"
+					(keyup)="MaskTelefone('telefone',pacienteForm.telefone)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('telefone')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Data de Nascimento:</p>
+					<ion-input class="input" type="text"
+					placeholder="Exemplo: 22/08/1985"
+					[(ngModel)]="pacienteForm.dataDeNascimento" name="dataDeNascimento" 
+					maxlength="10"
+					(keyup)="MaskData('dataDeNascimento',pacienteForm.dataDeNascimento)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('dataDeNascimento')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Email:</p>
+					<ion-input class="input" type="text"
+					placeholder="Exemplo: alan@gmail.com"
+					[(ngModel)]="pacienteForm.email" name="email" maxlength="100">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('email')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
 			</div>
 
-			<div class="div-input">
-				<ion-input class="input" type="number" placeholder="Telefone" required
-				[(ngModel)]="pacienteForm.telefone" name="telefone" ui-mask="(999) 999-9999" ui-mask-placeholder>
-				</ion-input>
-				<button type="button" class="botao-limpar" 
-				(click)="LimparCampoForm('telefone')">
-					<ion-icon name="ios-close" color="light"></ion-icon>
-				</button>
-			</div>
-
-			<div class="div-input">
-				<ion-input class="input" type="number" placeholder="Data De Nascimento" required
-				[(ngModel)]="pacienteForm.dataDeNascimento" name="dataDeNascimento">
-				</ion-input>
-				<button type="button" class="botao-limpar" 
-				(click)="LimparCampoForm('dataDeNascimento')">
-					<ion-icon name="ios-close" color="light"></ion-icon>
-				</button>
-			</div>
+			<h3 class="div-titulo">Endereço</h3>
 			
-			<div text-center class="btn-logar">
-				<button type="submit" color="appSecondary" clear ion-button>
-					Logar
+			<div padding>
+				<div class="div-input">
+					<p class="titulo-input">Rua/Avenida:</p>
+					<ion-input class="input" type="text" maxlength="150"
+					placeholder="Exemplo: Av. Oliveira Paiva"
+					[(ngModel)]="pacienteForm.rua" name="rua"
+					(ionBlur)="FormataNomes('rua',pacienteForm.rua)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('rua')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Bairro:</p>
+					<ion-input class="input" type="text" maxlength="100"
+					placeholder="Exemplo: Cidade Dos Funcionários"
+					[(ngModel)]="pacienteForm.bairro" name="bairro"
+					(ionBlur)="FormataNomes('bairro',pacienteForm.bairro)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('bairro')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Número:</p>
+					<ion-input class="input" type="number" maxlength="6"
+					placeholder="Exemplo: 2504"
+					[(ngModel)]="pacienteForm.numero" name="numero">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('numero')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Complemento:</p>
+					<ion-input class="input" type="text" maxlength="50"
+					placeholder="Exemplo: Ap: 105 - Bloco 2"
+					[(ngModel)]="pacienteForm.complemento" name="complemento"
+					(ionBlur)="FormataNomes('complemento',pacienteForm.complemento)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('complemento')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Cep:</p>
+					<ion-input class="input" type="text" maxlength="9"
+					placeholder="Exemplo: 60831-415"
+					[(ngModel)]="pacienteForm.cep" name="cep"
+					(keyup)="MaskCep('cep',pacienteForm.cep)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('cep')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Cidade:</p>
+					<ion-input class="input" type="text" maxlength="60"
+					placeholder="Exemplo: Fortaleza"
+					[(ngModel)]="pacienteForm.cidade" name="cidade"
+					(ionBlur)="FormataNomes('cidade',pacienteForm.cidade)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('cidade')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Estado:</p>
+					<ion-input class="input" type="text" maxlength="2"
+					placeholder="Exemplo: CE"
+					[(ngModel)]="pacienteForm.estado" name="estado"
+					(ionBlur)="FormataUpperCase('estado',pacienteForm.estado)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('estado')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+			</div>
+
+			<div class="div-botoes" text-center>
+				<button type="submit" class="salvar-formulario" ion-button>
+					Salvar
+				</button>
+				<button type="button" class="limpar-formulario" ion-button>
+					Limpar
 				</button>
 			</div>
 		

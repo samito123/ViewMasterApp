@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content class="background-pacientes">
-	<div class='divImagemExpandidaClips fade-in is-paused' 
+	<div class='divImagemExpandidaPacientes fade-in is-paused' 
 	(click)="FecharImagemExpandida()">
 		<div class="div-center">
 			<img class="img-usuario" src="{{imagemExpandida}}" />
@@ -25,21 +25,25 @@
 			<ion-icon name="ios-search" color="light"></ion-icon>
 		</button>
 	</div>
+	
 	<div padding>
-		<ion-list *ngFor="let paciente of listaDePacientes">
-			<ion-item class="item">
-				<a class="link-sem-decoracao" href="#" (click)="VisualizarPaciente(paciente.id)">
-					<h2>{{paciente.nome}}</h2>
-					<p>Contato: {{paciente.telefone}}</p>
-					<p>Idade: {{paciente.idade}} anos</p>
-				</a>
-					<ion-thumbnail item-end>
-						<a class="link-sem-decoracao" 
-						(click)="ExpandirImagem(paciente.imagem_paciente)">
-							<img src="{{paciente.imagem_paciente}}">
-						</a>
-					</ion-thumbnail>
-			</ion-item>
-		</ion-list>
+		<div class="div-lista-pacientes">
+			<ion-list *ngFor="let paciente of listaDePacientes">
+				<ion-item class="item">
+					<a class="link-sem-decoracao" href="#" 
+					(click)="VisualizarPaciente(paciente.id)">
+						<h2>{{paciente.nome}}</h2>
+						<p>Contato: {{paciente.telefone}}</p>
+						<p>Idade: {{paciente.idade}} anos</p>
+					</a>
+						<ion-thumbnail item-end>
+							<a class="link-sem-decoracao" 
+							(click)="ExpandirImagem(paciente.imagem_paciente)">
+								<img src="{{paciente.imagem_paciente}}">
+							</a>
+						</ion-thumbnail>
+				</ion-item>
+			</ion-list>
+		</div>
 	</div>
 </ion-content>

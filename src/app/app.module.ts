@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { HttpModule } from '@angular/http';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -42,6 +43,7 @@ import { AdicionarPacientesPage } from '../pages/adicionarPacientes/adicionarPac
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -102,6 +102,17 @@ page-lista-pacientes {
 		text-align: center;
 	}
 
+	.div-lista-pacientes{
+		width: 100%;
+	}
+
+	@media all and (min-width: 900px) { 
+		.div-lista-pacientes{  
+			width: 50%;
+			margin: 2em 25% 2em 25%;
+		} 
+	}
+
 	.item{
 		margin: 0 0 1em 0;
 		border-radius: 4px;
