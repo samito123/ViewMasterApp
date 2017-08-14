@@ -32,9 +32,20 @@
 				<ion-item class="item">
 					<a class="link-sem-decoracao" href="#" 
 					(click)="VisualizarPaciente(paciente.id)">
-						<h2>{{paciente.nome}}</h2>
-						<p>Contato: {{paciente.telefone}}</p>
-						<p>Idade: {{paciente.idade}} anos</p>
+						<h2>{{paciente.nome}} {{paciente.sobrenome}}</h2>
+						<p *ngIf="paciente.telefone !== ''">
+							Contato: {{paciente.telefone}}
+						</p>
+						<p *ngIf="paciente.telefone === ''">
+							Contato: Não Informado
+						</p>
+
+						<p *ngIf="paciente.idade !== null">
+							Idade: {{paciente.idade}} anos
+						</p>
+						<p *ngIf="paciente.idade === null">
+							Idade: Não Informado
+						</p>
 					</a>
 						<ion-thumbnail item-end>
 							<a class="link-sem-decoracao" 

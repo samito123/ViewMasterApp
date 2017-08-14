@@ -22,7 +22,7 @@
     $erro_query = 0;
     $sql;
     if($limit == false){
-      $sql="select id, imagem_paciente, nome, 
+      $sql="select id, imagem_paciente, nome, sobrenome, 
       telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
       from tb_pacientes
       where ((nome LIKE '%$pesquisar%')
@@ -30,7 +30,7 @@
       order by nome asc
       limit 20 offset $offset";
     }else{
-      $sql="select id, imagem_paciente, nome, 
+      $sql="select id, imagem_paciente, nome, sobrenome,
       telefone, TIMESTAMPDIFF(YEAR, data_de_nascimento, CURDATE()) as idade
       from tb_pacientes
       where ((nome LIKE '%$pesquisar%')
@@ -47,6 +47,7 @@
       $row_array['id'] = $dados['id'];
       $row_array['imagem_paciente'] = $dados['imagem_paciente'];
       $row_array['nome'] = $dados['nome'];
+      $row_array['sobrenome'] = $dados['sobrenome'];
       $row_array['telefone'] = $dados['telefone'];    
       $row_array['idade'] = $dados['idade'];
   

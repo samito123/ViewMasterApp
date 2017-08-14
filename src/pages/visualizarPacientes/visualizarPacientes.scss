@@ -1,0 +1,76 @@
+page-visualizar-pacientes {
+
+	.menu{
+		max-height: 2.5em;
+	}
+
+	.background-pacientes{
+		background-image: url('../assets/wallpapers/eye.png');
+	}
+
+	.div-visualizar-paciente{
+		background-color: #2b476a;
+		margin: 2em 1em 2em 1em;
+
+		font-family: serif;
+		color: white;
+		border-color:#cfcbcb;
+		border-radius: 14px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	@media all and (min-width: 900px) { 
+		.div-visualizar-paciente{  
+			width: 50%;
+			margin: 2em 25% 2em 25%;
+		} 
+	}
+
+	.div-titulo-topo{
+		margin: 0;
+		padding: 0.5em 0 0 0.5em;
+		border-radius: 14px 14px 0 0;
+		background-color: #2b3d53;
+	}
+
+	.div-titulo{
+		margin: 0;
+		padding: 0.25em 0 0.25em 0.5em;
+		background-color: #2b3d53;
+	}
+
+	.div-img{
+		margin: 0 0 1.5em 0;
+	}
+
+	.img-perfil-paciente{
+	    //filter: brightness(70%);
+	    width: 9em;
+	    height: 9em;
+	    //margin: 0;
+	    //padding: 0;
+	    background-color: #2b3d53;
+
+	    //-webkit-border-radius: 50%;
+    	//border-radius: 50%;
+	}
+
+	.div-input{
+		margin: 0 0 0 0;
+	}
+
+	.div-input span{
+		font-size: 0.7em;
+	}
+
+	.salvar-formulario{
+		margin: 0 1em 1em 0;
+		background-color: #2b3d53;
+	}
+
+	.limpar-formulario{
+		margin: 0 0 1em 0;
+		background-color: #2b3d53;
+	}
+
+}

@@ -10,6 +10,9 @@
   $foto= $angular_http_params["foto"];
   $paciente= json_decode($angular_http_params["paciente"], TRUE);
 
+  $caminhoFoto;
+  $nomeFoto;
+
   $conexao = new mysqli('localhost',$usuario, $senha, $banco);
   $conexao->autocommit(FALSE);
   $conexao->query("SET NAMES 'utf8'");
@@ -30,15 +33,17 @@
       echo "Paciente com nome e sobrenome informado já está cadastrado!";
     }else{
       mysqli_free_result($result);
-      if(!$foto === 'perfil'){
-        $nomeFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/'.
-        $paciente['nome'].date('Y-m-d H:i:s');
+      if($foto === "perfil"){
+        $caminhoFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/perfil.png';
       }else{
-        $nomeFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/perfil.png';
+        $nomeFoto = $paciente['nome'].date('Y-m-dH:i:s');
+        $caminhoFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/'.
+        $paciente['nome'].date('Y-m-dH:i:s').".png";
       }
+
       $sql2="insert into tb_pacientes 
       (imagem_paciente, nome, sobrenome, telefone, data_de_nascimento, email)
-      values ('".$nomeFoto."', '".$paciente['nome']."', '".$paciente['sobrenome']."', 
+      values ('".$caminhoFoto."', '".$paciente['nome']."', '".$paciente['sobrenome']."', 
       '".$paciente['telefone']."', '".$paciente['dataDeNascimento']."', 
       '".$paciente['email']."')";
       if (!mysqli_query($conexao, $sql2)) $erro_query++;
@@ -51,10 +56,10 @@
       '".$paciente['complemento']."', '".$paciente['cep']."', '".$paciente['cidade']."', 
       '".$paciente['estado']."', '$fk_paciente')";
       if (!mysqli_query($conexao, $sql3)) $erro_query++;
-
+      
       if ($erro_query == 0){
         try{
-          if(!$foto === 'perfil'){
+          if($foto !== "perfil"){
             $foto = substr(explode(";",$foto)[1], 7);
             file_put_contents('../pacientesImg/'.$nomeFoto.'.png', base64_decode($foto));
           }

@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LeftMenuPage } from '../pages/leftMenu/leftMenu'
+//import { VisualizarPacientesPage } from '../pages/visualizarPacientes/visualizarPacientes';
 @Component({
   templateUrl: 'app.html'
 })

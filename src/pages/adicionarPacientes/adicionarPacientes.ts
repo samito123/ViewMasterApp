@@ -64,6 +64,12 @@ export class AdicionarPacientesPage {
 		this.InserePaciente();
 	}
 
+	TrataImagemDePerfil(){
+		if(this.imagemPaciente === "./assets/icon/perfil.png"){
+			this.imagemPaciente = "perfil"; 
+		}
+	}
+
 	TransformaDataParaFormatoDoBancoDeDados(){
 		try{
 			this.pacienteForm['dataDeNascimento'] = new Date(
@@ -72,12 +78,6 @@ export class AdicionarPacientesPage {
 			this.pacienteForm['dataDeNascimento'].substring(0,2));
 		} catch(e){
 
-		}
-	}
-
-	TrataImagemDePerfil(){
-		if(this.imagemPaciente === "./assets/icon/perfil.png"){
-			this.imagemPaciente = "perfil"; 
 		}
 	}
 
@@ -167,21 +167,16 @@ export class AdicionarPacientesPage {
 	}
 
 	FormataNomes(campo, texto) {
-	    try{
-		    var loweredText = texto.toLowerCase();
-		    var words = loweredText.split(" ");
+		try{
+			var words = texto.toLowerCase().split(" ");
 		    for (var a = 0; a < words.length; a++) {
 		        var w = words[a];
-		        var firstLetter = w[0];
-		        if( w.length > 2){ 
-		           w = firstLetter.toUpperCase() + w.slice(1);
-		        } else {
-		           w = firstLetter + w.slice(1);
+		        if(words[a].length> 2){
+		        	words[a] = w[0].toUpperCase() + w.slice(1);
 		        }
-		        words[a] = w;
-	    	}
-	    	this.pacienteForm[campo] = words.join(" ");
-    	}catch(e){
+		    }
+		    this.pacienteForm[campo] = words.join(" ");
+	    }catch(e){
 
 		}
 	}

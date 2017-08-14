@@ -4,6 +4,10 @@ import { NavController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
+import { App } from 'ionic-angular';
+
+import { VisualizarPacientesPage } from '../visualizarPacientes/visualizarPacientes';
+
 @Component({
 	selector: 'page-lista-pacientes',
 	templateUrl: 'listaPacientes.html'
@@ -19,7 +23,7 @@ export class ListaPacientesPage {
 	loader;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
-		public http: Http) {
+		public http: Http, private app: App) {
 		this.CarregaLista();
 	}
 
@@ -49,7 +53,9 @@ export class ListaPacientesPage {
 	}
 
 	VisualizarPaciente(id){
-		console.log(id);
+		this.app.getRootNav().push(VisualizarPacientesPage, {listId: 'aa'});
+		//this.navCtrl.push(TabClip, {clipSelecionado: this.clip, offset: this.offset});
+		//this.navCtrl.push(VisualizarPacientesPage);
 	}
 
 	LimparCampoDePesquisa(){
