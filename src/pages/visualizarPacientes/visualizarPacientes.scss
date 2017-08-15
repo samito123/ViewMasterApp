@@ -51,16 +51,21 @@ page-visualizar-pacientes {
 	    //padding: 0;
 	    background-color: #2b3d53;
 
-	    //-webkit-border-radius: 50%;
-    	//border-radius: 50%;
+	    -webkit-border-radius: 50%;
+    	border-radius: 50%;
 	}
 
-	.div-input{
-		margin: 0 0 0 0;
+	.img-editar{
+		font-size: 1em;
 	}
 
-	.div-input span{
-		font-size: 0.7em;
+	.span-titulo{
+		font-size: 1em;
+	}
+
+	.span-descricao{
+		color: #d6e0f4;
+		font-size: 0.8em;
 	}
 
 	.salvar-formulario{

@@ -53,9 +53,8 @@ export class ListaPacientesPage {
 	}
 
 	VisualizarPaciente(id){
-		this.app.getRootNav().push(VisualizarPacientesPage, {listId: 'aa'});
-		//this.navCtrl.push(TabClip, {clipSelecionado: this.clip, offset: this.offset});
-		//this.navCtrl.push(VisualizarPacientesPage);
+		//this.app.getRootNav().push(VisualizarPacientesPage, {idPaciente: id});
+		this.app.getRootNavs()[0].push(VisualizarPacientesPage, {idPaciente: id});
 	}
 
 	LimparCampoDePesquisa(){

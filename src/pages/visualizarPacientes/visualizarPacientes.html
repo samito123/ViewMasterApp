@@ -7,80 +7,185 @@
 
 	<div class="div-visualizar-paciente">
 
-		<form (ngSubmit)="SalvarPaciente()" ngNativeValidate>
+		<h3 class="div-titulo-topo">Dados Pessoais</h3>
+
+		<div padding>
 			
-			<h3 class="div-titulo-topo">Dados Pessoais</h3>
-
-			<div padding>
-				
-				<div class="div-img" text-center>	
-					<img class="img-perfil-paciente" src="{{imagemPaciente}}"
-					(click)="TirarFoto()"> 
-				</div>
-				
-				<div class="div-input">
-					<h3>Nome: <span>Luiz Samuel</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Sobrenome: <span>Pinheiro Lima</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Telefone: <span>(85)9999-9989</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Dt. Nascimento: <span>22-07-1988</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Email: <span>luizsamuel_5@hotmail.com</span></h3>
-				</div>
+			<div class="div-img" text-center>	
+				<img class="img-perfil-paciente" src="{{imagemPaciente}}"
+				(click)="TirarFoto()"> 
 			</div>
 
-			<h3 class="div-titulo">Endereço</h3>
-			
-			<div padding>
-				<div class="div-input">
-					<h3>Rua/Avenida: <span>Oliveira Paiva</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Bairro: <span>Cidade Dos Funcionarios d vydcy vdjcyvdjvcjyvjycvyvjywcvjycdvcyj vcyvcjcvcyjvcyjvcyvcyycv</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Número: <span>1215</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Complemento: <span>Ap: 103, Bloco-A</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Cep: <span>60822-131</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Cidade: <span>Fortaleza</span></h3>
-				</div>
-
-				<div class="div-input">
-					<h3>Estado: <span>CE</span></h3>
-				</div>
+			<div (click)="AlterarDado('nome', 'Exemplo: Luiz Samuel', 
+			150, 'FormataNomes')">
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Nome: </span>
+					<span class="span-descricao" *ngIf="paciente.nome !== null">
+						{{paciente.nome}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.nome === null">
+						Não Informado
+					</span>
+				</h3>
 			</div>
 
-			<div class="div-botoes" text-center>
-				<button type="submit" class="salvar-formulario" ion-button>
-					Salvar
-				</button>
-				<button type="button" class="limpar-formulario" ion-button>
-					Limpar
-				</button>
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Sobrenome: </span>
+					<span class="span-descricao" *ngIf="paciente.sobrenome !== null">
+						{{paciente.sobrenome}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.sobrenome === null">
+						Não Informado
+					</span>
+				</h3>
 			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Telefone: </span>
+					<span class="span-descricao" *ngIf="paciente.telefone !== null">
+						{{paciente.telefone}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.telefone === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Dt. Nascimento: </span>
+					<span class="span-descricao" *ngIf="paciente.dataDeNascimento !== null">
+						{{paciente.dataDeNascimento}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.dataDeNascimento === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Email: </span>
+					<span class="span-descricao" *ngIf="paciente.email !== null">
+						{{paciente.email}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.email === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+		</div>
+
+		<h3 class="div-titulo">Endereço</h3>
 		
-	    </form>
+		<div padding>
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Rua/Avenida: </span>
+					<span class="span-descricao" *ngIf="paciente.rua !== null">
+						{{paciente.rua}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.rua === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
 
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Bairro: </span>
+					<span class="span-descricao" *ngIf="paciente.bairro !== null">
+						{{paciente.bairro}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.bairro === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Número: </span>
+					<span class="span-descricao" *ngIf="paciente.numero !== null">
+						{{paciente.numero}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.numero === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Complemento: </span>
+					<span class="span-descricao" *ngIf="paciente.complemento !== null">
+						{{paciente.complemento}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.complemento === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Cep: </span>
+					<span class="span-descricao" *ngIf="paciente.cep !== null">
+						{{paciente.cep}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.cep === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Cidade: </span>
+					<span class="span-descricao" *ngIf="paciente.cidade !== null">
+						{{paciente.cidade}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.cidade === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+			<div>
+				<h3>
+					<ion-icon class="img-editar" name="ios-create"></ion-icon>
+					<span class="span-titulo">Estado: </span>
+					<span class="span-descricao" *ngIf="paciente.estado !== null">
+						{{paciente.estado}}
+					</span>
+					<span class="span-descricao" *ngIf="paciente.estado === null">
+						Não Informado
+					</span>
+				</h3>
+			</div>
+
+		</div>
+
+		<div class="div-botoes" text-center>
+			<button type="submit" class="salvar-formulario" ion-button>
+				Editar
+			</button>
+			<button type="button" class="limpar-formulario" ion-button>
+				Excluir
+			</button>
+		</div>
 	</div>
 </ion-content>
