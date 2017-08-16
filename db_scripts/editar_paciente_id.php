@@ -7,6 +7,7 @@
   $usuario = $angular_http_params["usuario"];
   $senha= $angular_http_params["senha"];
   $banco= $angular_http_params["banco"];
+  $foto= $angular_http_params["foto"];
   $paciente= json_decode($angular_http_params["paciente"], TRUE);
  
   $conexao = new mysqli('localhost',$usuario, $senha, $banco);
@@ -22,13 +23,31 @@
     set nome= '".$paciente['nome']."', sobrenome= '".$paciente['sobrenome']."',
     telefone= '".$paciente['telefone']."', 
     data_de_nascimento= '".$paciente['dataDeNascimento']."',
-    email= '".$paciente['email']." '
+    email= '".$paciente['email']."'
     where id= ".$paciente['id'];
     if (!mysqli_query($conexao, $sql1)) $erro_query++;
 
+    $sql2="update tb_enderecos
+    set rua= '".$paciente['rua']."', bairro= '".$paciente['bairro']."',
+    numero= '".$paciente['numero']."', 
+    complemento= '".$paciente['complemento']."',
+    cep= '".$paciente['cep']."', cidade= '".$paciente['cidade']."',
+    estado= '".$paciente['estado']."'
+    where fk_paciente= ".$paciente['id'];
+    if (!mysqli_query($conexao, $sql2)) $erro_query++;
+
     if ($erro_query == 0){
-      mysqli_commit($conexao);
-      echo 'Paciente editado com sucesso!';
+      try{
+        if($foto !== "0"){
+          $foto = substr(explode(";",$foto)[1], 7);
+          file_put_contents('../pacientesImg/'.$paciente['nomeFoto'], base64_decode($foto));
+        }
+        mysqli_commit($conexao);
+        echo 'Paciente editado com sucesso!';
+      } catch (Exception $e){
+        echo mysqli_error($conexao);
+        mysqli_rollback($conexao);
+      }
     } else {
       echo mysqli_error($conexao);
       mysqli_rollback($conexao);

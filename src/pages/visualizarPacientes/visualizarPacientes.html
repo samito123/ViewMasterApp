@@ -1,5 +1,8 @@
 <ion-header>
 	<ion-navbar class="menu" color="menu">
+		<ion-title>
+			<p>Voltar</p>
+		</ion-title>
   	</ion-navbar>
 </ion-header>
 
@@ -16,67 +19,73 @@
 				(click)="TirarFoto()"> 
 			</div>
 
-			<div (click)="AlterarDado('nome', 'Exemplo: Luiz Samuel', 
-			150, 'FormataNomes')">
+			<div (click)="EditarDado('nome', 'Exemplo: Luiz Samuel', 
+			150, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Nome: </span>
-					<span class="span-descricao" *ngIf="paciente.nome !== null">
+					<span class="span-descricao" *ngIf="paciente.nome !== ''">
 						{{paciente.nome}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.nome === null">
+					<span class="span-descricao" *ngIf="paciente.nome === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('sobrenome', 'Exemplo: Pinheiro Lima', 
+			150, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Sobrenome: </span>
-					<span class="span-descricao" *ngIf="paciente.sobrenome !== null">
+					<span class="span-descricao" *ngIf="paciente.sobrenome !== ''">
 						{{paciente.sobrenome}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.sobrenome === null">
+					<span class="span-descricao" *ngIf="paciente.sobrenome === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('telefone', 'Exemplo: 85998040865', 
+			11, 'FormataTelefone', 'number')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Telefone: </span>
-					<span class="span-descricao" *ngIf="paciente.telefone !== null">
+					<span class="span-descricao" *ngIf="paciente.telefone !== ''">
 						{{paciente.telefone}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.telefone === null">
+					<span class="span-descricao" *ngIf="paciente.telefone === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('dataDeNascimento', 'Exemplo: 22071988', 
+			8, 'FormataData', 'number')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Dt. Nascimento: </span>
-					<span class="span-descricao" *ngIf="paciente.dataDeNascimento !== null">
+					<span class="span-descricao" 
+					*ngIf="paciente.dataDeNascimento !== '0000-00-00'">
 						{{paciente.dataDeNascimento}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.dataDeNascimento === null">
+					<span class="span-descricao" 
+					*ngIf="paciente.dataDeNascimento === '0000-00-00'">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('email', 'Exemplo: luizsamuel_5@hotmail.com', 
+			100, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Email: </span>
-					<span class="span-descricao" *ngIf="paciente.email !== null">
+					<span class="span-descricao" *ngIf="paciente.email !== ''">
 						{{paciente.email}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.email === null">
+					<span class="span-descricao" *ngIf="paciente.email === ''">
 						Não Informado
 					</span>
 				</h3>
@@ -86,92 +95,99 @@
 		<h3 class="div-titulo">Endereço</h3>
 		
 		<div padding>
-			<div>
+			<div (click)="EditarDado('rua', 'Exemplo: Av. Oliveira Paiva', 
+			150, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Rua/Avenida: </span>
-					<span class="span-descricao" *ngIf="paciente.rua !== null">
+					<span class="span-descricao" *ngIf="paciente.rua !== ''">
 						{{paciente.rua}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.rua === null">
+					<span class="span-descricao" *ngIf="paciente.rua === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('bairro', 'Exemplo: Cidade Dos Funcionários', 
+			100, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Bairro: </span>
-					<span class="span-descricao" *ngIf="paciente.bairro !== null">
+					<span class="span-descricao" *ngIf="paciente.bairro !== ''">
 						{{paciente.bairro}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.bairro === null">
+					<span class="span-descricao" *ngIf="paciente.bairro === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('numero', 'Exemplo: 2504', 
+			6, 'FormataNome', 'number')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Número: </span>
-					<span class="span-descricao" *ngIf="paciente.numero !== null">
+					<span class="span-descricao" *ngIf="paciente.numero !== ''">
 						{{paciente.numero}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.numero === null">
+					<span class="span-descricao" *ngIf="paciente.numero === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('complemento', 'Exemplo: Apto: 105 - Bloco 2', 
+			50, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Complemento: </span>
-					<span class="span-descricao" *ngIf="paciente.complemento !== null">
+					<span class="span-descricao" *ngIf="paciente.complemento !== ''">
 						{{paciente.complemento}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.complemento === null">
+					<span class="span-descricao" *ngIf="paciente.complemento === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('cep', 'Exemplo: 60822131', 
+			8, 'FormataCep', 'number')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Cep: </span>
-					<span class="span-descricao" *ngIf="paciente.cep !== null">
+					<span class="span-descricao" *ngIf="paciente.cep !== ''">
 						{{paciente.cep}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.cep === null">
+					<span class="span-descricao" *ngIf="paciente.cep === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('cidade', 'Exemplo: Fortaleza', 
+			60, 'FormataNome', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Cidade: </span>
-					<span class="span-descricao" *ngIf="paciente.cidade !== null">
+					<span class="span-descricao" *ngIf="paciente.cidade !== ''">
 						{{paciente.cidade}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.cidade === null">
+					<span class="span-descricao" *ngIf="paciente.cidade === ''">
 						Não Informado
 					</span>
 				</h3>
 			</div>
 
-			<div>
+			<div (click)="EditarDado('estado', 'Exemplo: CE', 
+			2, 'FormataSigla', 'text')">
 				<h3>
 					<ion-icon class="img-editar" name="ios-create"></ion-icon>
 					<span class="span-titulo">Estado: </span>
-					<span class="span-descricao" *ngIf="paciente.estado !== null">
+					<span class="span-descricao" *ngIf="paciente.estado !== ''">
 						{{paciente.estado}}
 					</span>
-					<span class="span-descricao" *ngIf="paciente.estado === null">
+					<span class="span-descricao" *ngIf="paciente.estado === ''">
 						Não Informado
 					</span>
 				</h3>
@@ -180,8 +196,9 @@
 		</div>
 
 		<div class="div-botoes" text-center>
-			<button type="submit" class="salvar-formulario" ion-button>
-				Editar
+			<button type="submit" class="salvar-formulario" ion-button
+			(click)="ConfirmaEditarPaciente()">
+				Salvar Alterações
 			</button>
 			<button type="button" class="limpar-formulario" ion-button>
 				Excluir

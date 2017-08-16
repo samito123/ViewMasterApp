@@ -5,6 +5,7 @@ import { LoadingController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
@@ -21,7 +22,9 @@ export class VisualizarPacientesPage {
 	loader;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
-		public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
+		public navParams: NavParams, public http: Http, 
+		public camera: Camera, public alertCtrl: AlertController,
+		public toastCtrl: ToastController) {
 		
 		this.idPaciente = navParams.get("idPaciente");
 		this.InicializaVisualizacaoDePaciente();
@@ -58,6 +61,11 @@ export class VisualizarPacientesPage {
 	SetDadosPaciente(data){
 		this.paciente['id'] = data[0].id;
 		this.imagemPaciente = data[0].imagem_paciente;
+		this.paciente['imagemPaciente'] = data[0].imagem_paciente;
+
+		this.paciente['nomeFoto'] = data[0].imagem_paciente.replace(
+			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");
+
 		this.paciente['nome'] = data[0].nome;
 		this.paciente['sobrenome'] = data[0].sobrenome;
 		this.paciente['telefone'] = data[0].telefone;
@@ -73,7 +81,24 @@ export class VisualizarPacientesPage {
 		this.paciente['estado'] = data[0].estado;
 	}
 
-	AlterarDado(campo, exemplo, qtdCaracteres, tipoFormatacao){
+	TirarFoto(){
+		const options: CameraOptions = {
+			quality: 100,
+			destinationType: this.camera.DestinationType.DATA_URL,
+			encodingType: this.camera.EncodingType.PNG,
+			mediaType: this.camera.MediaType.PICTURE,
+			targetWidth: 350,
+		}
+
+		this.camera.getPicture(options).then((imageData) => {
+			let base64Image = 'data:image/jpeg;base64,' + imageData;
+			this.imagemPaciente = base64Image;
+		}, (err) => {
+
+		});
+	}
+
+	EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo){
 		let prompt = this.alertCtrl.create({
 			title: 'Editar '+campo,
 			message: "Digite o valor que desejado com até "+qtdCaracteres+" caracteres.",
@@ -81,6 +106,9 @@ export class VisualizarPacientesPage {
 				{
 					name: campo,
 					placeholder: exemplo,
+					value: this.paciente[campo],
+					type: tipo,
+					max: '3'
 				},
 			],
 	      	buttons: [
@@ -91,11 +119,10 @@ export class VisualizarPacientesPage {
 					}
 				},
         		{
-					text: 'Salvar',
+					text: 'Editar',
 					handler: data => {
-						var texto = this.FormataTipo(tipoFormatacao, 
-						data[campo].substring(0 , qtdCaracteres));
-						this.ConfirmaEdicaoPaciente(campo, qtdCaracteres, texto);
+						this.ValidaEdicaoDeDado(campo, exemplo, 
+						qtdCaracteres, Formatacao, tipo, data[campo]);
 					}
 				}
 	      	]
@@ -103,10 +130,21 @@ export class VisualizarPacientesPage {
 	    prompt.present();
 	}
 
-	ConfirmaEdicaoPaciente(campo, qtdCaracteres, texto){
+	ValidaEdicaoDeDado(campo, exemplo, qtdCaracteres, Formatacao, tipo, data){
+		if(data.length > qtdCaracteres){
+			this.Toast('A quantidade de caracteres ultrapassou o '+
+				'limite permitido. Limite: '+qtdCaracteres+' caracteres.');
+			this.EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo);
+		}else {
+			var texto = this.FormataTipo(Formatacao, data);
+			this.ConfirmaEdicaoDeDadosPaciente(campo, qtdCaracteres, texto);
+		}
+	}
+
+	ConfirmaEdicaoDeDadosPaciente(campo, qtdCaracteres, texto){
 		let confirm = this.alertCtrl.create({
 			title: 'Confirmar edição?',
-			message: campo+": "+texto,
+			message: this.FormataMensagemDeConfirmacao(campo, texto),
 	      	buttons: [
 				{
 					text: 'Não',
@@ -117,9 +155,7 @@ export class VisualizarPacientesPage {
         		{
 					text: 'Sim',
 					handler: data => {
-						this.InicializarLoading();
 						this.paciente[campo] = texto;
-						this.EditarPaciente(campo, texto);
 					}
 				}
 	      	]
@@ -127,17 +163,87 @@ export class VisualizarPacientesPage {
 	    confirm.present();
 	}
 
-	FormataTipo(tipoFormatacao, texto){
+	FormataMensagemDeConfirmacao(campo, texto){
 		var textoFormatado;
-		switch(tipoFormatacao) {
-		    case "FormataNomes":
-		        textoFormatado = this.FormataNomes(texto);
+		switch(campo) {
+		    case "nome":
+		        textoFormatado = 'Nome: '+texto;
 		        break;
+
+	        case "sobrenome":
+		        textoFormatado = 'Sobrenome: '+texto;
+		        break;
+
+	        case "telefone":
+		        textoFormatado = 'Telefone: '+texto;
+		        break;
+
+	        case "dataDeNascimento":
+		        textoFormatado = 'Dt. Nascimento: '+texto;
+		        break;
+
+	        case "email":
+		        textoFormatado = 'Email: '+texto;
+		        break;
+
+	        case "rua":
+		        textoFormatado = 'Rua/Avenida: '+texto;
+		        break;
+
+	        case "bairro":
+		        textoFormatado = 'Bairro: '+texto;
+		        break;
+
+	        case "numero":
+		        textoFormatado = 'Número: '+texto;
+		        break;
+
+	        case "complemento":
+		        textoFormatado = 'Complemento: '+texto;
+		        break;
+
+	        case "cep":
+		        textoFormatado = 'Cep: '+texto;
+		        break;
+
+	        case "cidade":
+		        textoFormatado = 'Cidade: '+texto;
+		        break;
+
+        	case "estado":
+		        textoFormatado = 'Estado: '+texto;
+		        break;
+	    }
+	    return textoFormatado;
+	}
+
+	FormataTipo(Formatacao, texto){
+		var textoFormatado;
+		switch(Formatacao) {
+		    case "FormataNome":
+		        textoFormatado = this.FormataNome(texto);
+		        break;
+
+	        case "FormataTelefone":
+		        textoFormatado = this.FormataTelefone(texto);
+		        break;
+
+		    case "FormataData":
+		        textoFormatado = this.FormataData(texto);
+		        break;
+		        
+	        case "FormataCep":
+		        textoFormatado = this.FormataCep(texto);
+		        break;   
+
+	        case "FormataSigla":
+		        textoFormatado = this.FormataSigla(texto);
+		        break; 
 		}
 		return textoFormatado;
 	}
 
-	FormataNomes(texto) {
+	FormataNome(texto) {
 		try{
 			var words = texto.toLowerCase().split(" ");
 		    for (var a = 0; a < words.length; a++) {
@@ -152,23 +258,131 @@ export class VisualizarPacientesPage {
 		}
 	}
 
-	EditarPaciente(campo, texto){
+	FormataTelefone(texto){
+		try{
+			return texto.replace( /\D/g, '' )
+	       	.replace( /^(\d\d)(\d)/g, '($1) $2' )
+	       	.replace( /(\d{5})(\d)/, '$1-$2' );
+   		}catch(e){
+
+		}
+	}
+
+	FormataData(texto){
+		try{
+			return texto.replace( /\D/g, '' )
+	       	.replace( /^(\d\d)(\d)/g, '$1/$2' )
+	       	.replace( /(\d\d)(\d)/, '$1/$2' );
+   		}catch(e){
+
+		}
+	}
+
+	FormataCep(texto){
+		try{
+			return texto.replace( /\D/g, '' )
+	       	.replace( /^(\d{5})(\d)/g, '$1-$2')
+   		}catch(e){
+
+		}
+	}
+
+	FormataSigla(texto){
+		try{
+			return texto.toUpperCase();
+		}catch(e){
+
+		}
+	}
+
+	ConfirmaEditarPaciente(){
+		let confirm = this.alertCtrl.create({
+			title: 'Alterar dados',
+			message: 'Deseja realmente alterar os dados do paciente?',
+	      	buttons: [
+				{
+					text: 'Não',
+					handler: data => {
+						
+					}
+				},
+        		{
+					text: 'Sim',
+					handler: data => {
+						this.PreparaAlterarPaciente();
+					}
+				}
+	      	]
+	    });
+	    confirm.present();
+	}
+
+	PreparaAlterarPaciente(){
+		this.InicializarLoading();
+		this.FormataPacienteParaServidor();
+		this.EditarPaciente();
+	}
+
+	FormataPacienteParaServidor(){	
+		this.FormataFoto();	
+		this.FormataEspacos('nome');
+		this.FormataEspacos('sobrenome');
+		this.FormataEspacos('telefone');
+		this.FormataEspacos('dataDeNascimento');
+		this.TransformaDataParaFormatoDoBancoDeDados();
+		this.FormataEspacos('email');
+		
+		this.FormataEspacos('rua');
+		this.FormataEspacos('bairro');
+		this.FormataEspacos('numero');
+		this.FormataEspacos('complemento');
+		this.FormataEspacos('cep');
+		this.FormataEspacos('cidade');
+		this.FormataEspacos('estado');
+	}
+
+	FormataFoto(){
+		if(this.imagemPaciente === this.paciente['imagemPaciente']){
+			this.imagemPaciente = '0';
+		}
+	}
+
+	FormataEspacos(campo){
+		this.paciente[campo] = this.paciente[campo].trim();
+	}
+
+	TransformaDataParaFormatoDoBancoDeDados(){
+		try{
+			this.paciente['dataDeNascimento'] = new Date(
+			this.paciente['dataDeNascimento'].substring(6,10),
+			this.paciente['dataDeNascimento'].substring(3,5) - 1,
+			this.paciente['dataDeNascimento'].substring(0,2));
+		} catch(e){
+
+		}
+	}
+
+	EditarPaciente(){
 		var headers = new Headers();
 	    headers.append('Content-Type', 'application/x-www-form-urlencoded');
 	    let options = new RequestOptions({ headers: headers });
 	 
 	    let postParams = {
 			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
-			paciente: JSON.stringify(this.paciente)
+			foto: this.imagemPaciente, paciente: JSON.stringify(this.paciente)
 	    }
 	    
 		this.http.post(this.url+'pacientes/editar_paciente_id.php', postParams, options)
 			.subscribe(data => {
-				console.log(data['_body']);
-				this.EncerraLoading();
+				this.TrataRetornoServidorEditarPaciente(data['_body']);
 			}, error => {
-				console.log(error);// Error getting the data
+				console.log(error);
 		});
+	}
+
+	TrataRetornoServidorEditarPaciente(data){
+		this.Toast(data);
+		this.EncerraLoading();
 	}
 
 	InicializarLoading() { 
@@ -180,6 +394,14 @@ export class VisualizarPacientesPage {
 
 	EncerraLoading(){
 		this.loader.dismiss();
+	}
+
+	Toast(mensagem) {
+		let toast = this.toastCtrl.create({
+			message: mensagem,
+			duration: 3500
+		});
+		toast.present();
 	}
 
 }

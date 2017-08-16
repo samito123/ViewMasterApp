@@ -19,8 +19,8 @@
   try{
     $erro_query = 0;
     $sql="select p.id, p.imagem_paciente, p.nome, p.sobrenome, 
-    isnull(p.telefone), p.data_de_nascimento, isnull(p.email), isnull(e.rua), isnull(e.bairro),
-    isnull(e.numero), isnull(e.complemento), isnull(e.cep), isnull(e.cidade), isnull(e.estado) 
+    p.telefone, p.data_de_nascimento, p.email, e.rua, e.bairro,
+    e.numero, e.complemento, e.cep, e.cidade, e.estado 
     from tb_pacientes as p
     left join tb_enderecos as e on e.fk_paciente = p.id
     where p.id = $idPaciente";
