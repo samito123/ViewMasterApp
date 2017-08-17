@@ -19,10 +19,14 @@
 
   try{
     $erro_query = 0;
+
+    $caminhoFotoFinal = $paciente['caminhoFoto'].$paciente['nomeFotoFinal'];
+
     $sql1="update tb_pacientes
-    set nome= '".$paciente['nome']."', sobrenome= '".$paciente['sobrenome']."',
+    set imagem_paciente= '".$caminhoFotoFinal."', 
+    nome= '".$paciente['nome']."', sobrenome= '".$paciente['sobrenome']."',
     telefone= '".$paciente['telefone']."', 
-    data_de_nascimento= '".$paciente['dataDeNascimento']."',
+    data_de_nascimento= '".$paciente['dataDeNascimentoBanco']."',
     email= '".$paciente['email']."'
     where id= ".$paciente['id'];
     if (!mysqli_query($conexao, $sql1)) $erro_query++;
@@ -38,10 +42,21 @@
 
     if ($erro_query == 0){
       try{
-        if($foto !== "0"){
-          $foto = substr(explode(";",$foto)[1], 7);
-          file_put_contents('../pacientesImg/'.$paciente['nomeFoto'], base64_decode($foto));
+        if($paciente['imagemPacienteBase64'] !== "0" && $paciente['nomeFotoFinal'] !== "perfil.png"){
+          $paciente['imagemPacienteBase64'] = 
+          substr(explode(";",$paciente['imagemPacienteBase64'])[1], 7);
+          file_put_contents('../pacientesImg/'.$paciente['nomeFotoFinal'], 
+          base64_decode($paciente['imagemPacienteBase64'])); 
         }
+
+        try{
+          if($paciente['nomeFoto'] !== "perfil.png"){
+            unlink("../pacientesImg/".$paciente['nomeFoto']);
+          }
+        } catch (Exception $e){
+          
+        }
+
         mysqli_commit($conexao);
         echo 'Paciente editado com sucesso!';
       } catch (Exception $e){

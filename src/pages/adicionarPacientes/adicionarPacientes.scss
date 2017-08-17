@@ -21,8 +21,8 @@ page-adicionar-pacientes {
 
 	@media all and (min-width: 900px) { 
 		.div-adicionar-paciente{  
-			width: 50%;
-			margin: 2em 25% 2em 25%;
+			width: 80%;
+			margin: 2em 10% 2em 10%;
 		} 
 	}
 
@@ -47,8 +47,8 @@ page-adicionar-pacientes {
 	    //padding: 0;
 	    background-color: #2b3d53;
 
-	    //-webkit-border-radius: 50%;
-    	//border-radius: 50%;
+	    -webkit-border-radius: 50%;
+    	border-radius: 50%;
 	}
 
 	.div-input{

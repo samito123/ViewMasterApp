@@ -7,6 +7,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Events } from 'ionic-angular';
 
 @Component({
 	selector: 'page-visualizar-pacientes',
@@ -16,7 +17,6 @@ export class VisualizarPacientesPage {
 
 	idPaciente;
 	paciente = {};
-	imagemPaciente = "./assets/icon/perfil.png";
 	
 	url = 'http://br400.teste.website/~appot240/view_master_app/';
 	loader;
@@ -24,8 +24,9 @@ export class VisualizarPacientesPage {
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
 		public navParams: NavParams, public http: Http, 
 		public camera: Camera, public alertCtrl: AlertController,
-		public toastCtrl: ToastController) {
+		public toastCtrl: ToastController, public events: Events) {
 		
+		this.paciente['img'] = "./assets/icon/perfil.png";
 		this.idPaciente = navParams.get("idPaciente");
 		this.InicializaVisualizacaoDePaciente();
 	}
@@ -60,16 +61,22 @@ export class VisualizarPacientesPage {
 
 	SetDadosPaciente(data){
 		this.paciente['id'] = data[0].id;
-		this.imagemPaciente = data[0].imagem_paciente;
+		this.paciente['img'] = data[0].imagem_paciente;
 		this.paciente['imagemPaciente'] = data[0].imagem_paciente;
 
+		this.paciente['caminhoFoto'] = 
+		'http://br400.teste.website/~appot240/view_master_app/pacientesImg/';
 		this.paciente['nomeFoto'] = data[0].imagem_paciente.replace(
+			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");
+
+		this.paciente['nomeFotoFinal'] = data[0].imagem_paciente.replace(
 			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");
 
 		this.paciente['nome'] = data[0].nome;
 		this.paciente['sobrenome'] = data[0].sobrenome;
 		this.paciente['telefone'] = data[0].telefone;
-		this.paciente['dataDeNascimento'] = data[0].data_de_nascimento;
+		this.paciente['dataDeNascimento'] = 
+		this.SetDataDeNascimento(data[0].data_de_nascimento);
 		this.paciente['email'] = data[0].email;
 
 		this.paciente['rua'] = data[0].rua;
@@ -79,6 +86,15 @@ export class VisualizarPacientesPage {
 		this.paciente['cep'] = data[0].cep;
 		this.paciente['cidade'] = data[0].cidade;
 		this.paciente['estado'] = data[0].estado;
+	}
+
+	SetDataDeNascimento(valor){
+		if(valor !== "0000-00-00"){
+			return valor.substring(8, 10)+'/'+valor.substring(5,7)
+			+'/'+valor.substring(0, 4);
+		}else{
+			return "0000-00-00";
+		}
 	}
 
 	TirarFoto(){
@@ -92,10 +108,26 @@ export class VisualizarPacientesPage {
 
 		this.camera.getPicture(options).then((imageData) => {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
-			this.imagemPaciente = base64Image;
+			this.paciente['img'] = base64Image;
+			this.FormaNovoCaminhoFoto();
+			
 		}, (err) => {
-
+			this.FormaNovoCaminhoFoto();
 		});
+	}
+
+	LimparImagem(){
+		this.paciente['img'] = "./assets/icon/perfil.png";
+		this.paciente['nomeFotoFinal'] = "perfil.png";
+	}
+
+	FormaNovoCaminhoFoto(){
+		var data = new Date();
+		var stringData = data.toLocaleString();
+		stringData = stringData.replace('/', '-').replace('/', '-')
+		.replace('/', '-').replace(' ', '');
+
+		this.paciente['nomeFotoFinal'] = this.paciente['nome']+stringData+".png";
 	}
 
 	EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo){
@@ -106,7 +138,7 @@ export class VisualizarPacientesPage {
 				{
 					name: campo,
 					placeholder: exemplo,
-					value: this.paciente[campo],
+					//value: this.paciente[campo],
 					type: tipo,
 					max: '3'
 				},
@@ -131,12 +163,23 @@ export class VisualizarPacientesPage {
 	}
 
 	ValidaEdicaoDeDado(campo, exemplo, qtdCaracteres, Formatacao, tipo, data){
-		if(data.length > qtdCaracteres){
+		if(campo === "nome" && data.length == 0){
+			this.Toast('O campo nome não pode ser vazio!');
+			this.EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo);
+		}else if(campo === "sobrenome" && data.length == 0){
+			this.Toast('O campo sobrenome não pode ser vazio!');
+			this.EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo);
+		}else if(data.length > qtdCaracteres){
 			this.Toast('A quantidade de caracteres ultrapassou o '+
 				'limite permitido. Limite: '+qtdCaracteres+' caracteres.');
 			this.EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo);
 		}else {
-			var texto = this.FormataTipo(Formatacao, data);
+			var texto
+			if(data.length > 1){
+				texto = this.FormataTipo(Formatacao, data);
+			}else{
+				texto = 'Não Informado';
+			}	
 			this.ConfirmaEdicaoDeDadosPaciente(campo, qtdCaracteres, texto);
 		}
 	}
@@ -342,8 +385,10 @@ export class VisualizarPacientesPage {
 	}
 
 	FormataFoto(){
-		if(this.imagemPaciente === this.paciente['imagemPaciente']){
-			this.imagemPaciente = '0';
+		if(this.paciente['img'] === this.paciente['imagemPaciente']){
+			this.paciente['imagemPacienteBase64'] = '0';
+		}else {
+			this.paciente['imagemPacienteBase64'] = this.paciente['img'];
 		}
 	}
 
@@ -353,10 +398,14 @@ export class VisualizarPacientesPage {
 
 	TransformaDataParaFormatoDoBancoDeDados(){
 		try{
-			this.paciente['dataDeNascimento'] = new Date(
-			this.paciente['dataDeNascimento'].substring(6,10),
-			this.paciente['dataDeNascimento'].substring(3,5) - 1,
-			this.paciente['dataDeNascimento'].substring(0,2));
+				if(this.paciente['dataDeNascimento'] !== "Não Informado"){
+					this.paciente['dataDeNascimentoBanco'] = new Date(
+					this.paciente['dataDeNascimento'].substring(6,10),
+					this.paciente['dataDeNascimento'].substring(3,5) - 1,
+					this.paciente['dataDeNascimento'].substring(0,2));
+				} else{
+					this.paciente['dataDeNascimentoBanco'] = '0000-00-00';
+				}	
 		} catch(e){
 
 		}
@@ -369,7 +418,7 @@ export class VisualizarPacientesPage {
 	 
 	    let postParams = {
 			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
-			foto: this.imagemPaciente, paciente: JSON.stringify(this.paciente)
+			paciente: JSON.stringify(this.paciente)
 	    }
 	    
 		this.http.post(this.url+'pacientes/editar_paciente_id.php', postParams, options)
@@ -382,7 +431,9 @@ export class VisualizarPacientesPage {
 
 	TrataRetornoServidorEditarPaciente(data){
 		this.Toast(data);
+		this.paciente['nomeFoto'] = this.paciente['nomeFotoFinal'];
 		this.EncerraLoading();
+		this.events.publish('BuscarPacientesPorFiltro');
 	}
 
 	InicializarLoading() { 

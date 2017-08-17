@@ -3,9 +3,9 @@ import { NavController } from 'ionic-angular';
 
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Events } from 'ionic-angular';
 
 import { App } from 'ionic-angular';
-
 import { VisualizarPacientesPage } from '../visualizarPacientes/visualizarPacientes';
 
 @Component({
@@ -23,7 +23,12 @@ export class ListaPacientesPage {
 	loader;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
-		public http: Http, private app: App) {
+		public http: Http, private app: App, public events: Events) {
+		
+		events.subscribe('BuscarPacientesPorFiltro', () => {
+		  this.BuscarPacientesPorFiltro();
+		});
+
 		this.CarregaLista();
 	}
 
@@ -53,7 +58,6 @@ export class ListaPacientesPage {
 	}
 
 	VisualizarPaciente(id){
-		//this.app.getRootNav().push(VisualizarPacientesPage, {idPaciente: id});
 		this.app.getRootNavs()[0].push(VisualizarPacientesPage, {idPaciente: id});
 	}
 

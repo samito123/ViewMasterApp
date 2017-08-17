@@ -14,9 +14,15 @@
 
 		<div padding>
 			
-			<div class="div-img" text-center>	
-				<img class="img-perfil-paciente" src="{{imagemPaciente}}"
+			<div text-center>	
+				<img class="img-perfil-paciente" src="{{paciente.img}}"
 				(click)="TirarFoto()"> 
+			</div>
+			<div text-center>
+				<button type="button" class="botao-limpar-img" 
+				(click)="LimparImagem()">
+					<ion-icon name="ios-close" color="light"></ion-icon>
+				</button>
 			</div>
 
 			<div (click)="EditarDado('nome', 'Exemplo: Luiz Samuel', 

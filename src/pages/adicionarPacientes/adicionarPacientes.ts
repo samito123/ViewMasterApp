@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ToastController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 @Component({
 	selector: 'page-adicionar-pacientes',
@@ -12,14 +14,15 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class AdicionarPacientesPage {
 
 	pacienteForm = {};
-	imagemPaciente = "./assets/icon/perfil.png";
 	
 	url = 'http://br400.teste.website/~appot240/view_master_app/';
 	loader;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
-		public http: Http, public camera: Camera) {
+		public http: Http, public camera: Camera, public toastCtrl: ToastController, 
+		public events: Events) {
 		
+		this.pacienteForm['img'] = "./assets/icon/perfil.png";
 	}
 
 	TirarFoto(){
@@ -33,27 +36,9 @@ export class AdicionarPacientesPage {
 
 		this.camera.getPicture(options).then((imageData) => {
 			let base64Image = 'data:image/jpeg;base64,' + imageData;
-			this.imagemPaciente = base64Image;
+			this.pacienteForm['img'] = base64Image;
 		}, (err) => {
 
-		});
-	}
-
-	SalvarImagemServidor(){
-		var headers = new Headers();
-	    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-	    let options = new RequestOptions({ headers: headers });
-	 
-	    let postParams = {
-			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
-			foto: this.imagemPaciente 
-	    }
-	    
-		this.http.post(this.url+'pacientes/salvar_img_paciente.php', postParams, options)
-			.subscribe(data => {	
-				this.EncerraLoading();
-			}, error => {
-				console.log(error);// Error getting the data
 		});
 	}
 
@@ -65,14 +50,16 @@ export class AdicionarPacientesPage {
 	}
 
 	TrataImagemDePerfil(){
-		if(this.imagemPaciente === "./assets/icon/perfil.png"){
-			this.imagemPaciente = "perfil"; 
+		if(this.pacienteForm['img'] === "./assets/icon/perfil.png"){
+			this.pacienteForm['imagemPacienteBase64'] = "perfil"; 
+		}else {
+			this.pacienteForm['imagemPacienteBase64'] = this.pacienteForm['img'];
 		}
 	}
 
 	TransformaDataParaFormatoDoBancoDeDados(){
 		try{
-			this.pacienteForm['dataDeNascimento'] = new Date(
+			this.pacienteForm['dataDeNascimentoBanco'] = new Date(
 			this.pacienteForm['dataDeNascimento'].substring(6,10),
 			this.pacienteForm['dataDeNascimento'].substring(3,5) - 1,
 			this.pacienteForm['dataDeNascimento'].substring(0,2));
@@ -88,24 +75,23 @@ export class AdicionarPacientesPage {
 	 
 	    let postParams = {
 			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
-			foto: this.imagemPaciente, paciente: JSON.stringify(this.pacienteForm)
+			paciente: JSON.stringify(this.pacienteForm)
 	    }
 	    
 		this.http.post(this.url+'pacientes/insere_paciente.php', postParams, options)
 			.subscribe(data => {
-				//console.log(data['_body']);
 				this.TrataRetornoServidor(data['_body']);
-				//this.EncerraLoading();
 			}, error => {
-				console.log(error);// Error getting the data
+				console.log(error);
 				this.EncerraLoading();
 		});
 	}
 
 	TrataRetornoServidor(data){
-		console.log(data);
+		this.Toast(data);
 		this.LimpaFormulario();
 		this.EncerraLoading();
+		this.events.publish('BuscarPacientesPorFiltro');
 	}
 
 	LimpaFormulario(){
@@ -126,18 +112,14 @@ export class AdicionarPacientesPage {
 	}
 
 	LimparImagem(){
-		this.imagemPaciente = "./assets/icon/perfil.png";
+		this.pacienteForm['img'] = "./assets/icon/perfil.png";
 	}
 
 	LimparCampoForm(campo){
 		this.pacienteForm[campo] = "";
 	}
 
-	onFocusMethod(text){
-		console.log(text);
-	}
-
-	MaskTelefone(campo, texto){
+	FormataTelefone(campo, texto){
 		try{
 			this.pacienteForm[campo] = texto.replace( /\D/g, '' )
 	       	.replace( /^(\d\d)(\d)/g, '($1) $2' )
@@ -147,7 +129,7 @@ export class AdicionarPacientesPage {
 		}
 	}
 
-	MaskData(campo, texto){
+	FormataData(campo, texto){
 		try{
 			this.pacienteForm[campo] = texto.replace( /\D/g, '' )
 	       	.replace( /^(\d\d)(\d)/g, '$1/$2' )
@@ -157,7 +139,7 @@ export class AdicionarPacientesPage {
 		}
 	}
 
-	MaskCep(campo, texto){
+	FormataCep(campo, texto){
 		try{
 			this.pacienteForm[campo] = texto.replace( /\D/g, '' )
 	       	.replace( /^(\d{5})(\d)/g, '$1-$2')
@@ -166,7 +148,7 @@ export class AdicionarPacientesPage {
 		}
 	}
 
-	FormataNomes(campo, texto) {
+	FormataNome(campo, texto) {
 		try{
 			var words = texto.toLowerCase().split(" ");
 		    for (var a = 0; a < words.length; a++) {
@@ -181,7 +163,7 @@ export class AdicionarPacientesPage {
 		}
 	}
 
-	FormataUpperCase(campo, texto){
+	FormataSigla(campo, texto){
 		try{
 			this.pacienteForm[campo] = texto.toUpperCase();
 		}catch(e){
@@ -198,6 +180,14 @@ export class AdicionarPacientesPage {
 
 	EncerraLoading(){
 		this.loader.dismiss();
+	}
+
+	Toast(mensagem) {
+		let toast = this.toastCtrl.create({
+			message: mensagem,
+			duration: 3500
+		});
+		toast.present();
 	}
 
 }

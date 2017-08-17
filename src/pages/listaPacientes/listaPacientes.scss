@@ -69,18 +69,6 @@ page-lista-pacientes {
 		animation-play-state: paused;
 	}
 
-	.buttom-close{
-		width: 1em;
-		height: 1em;
-		position:absolute;
-		top:50%;
-		left:50%;
-		margin-top: -6.5em;
-		margin-left: 5.5em;
-		font-size: 2em;
-		color: #a50001;
-	}
-
 	.div-center{
 		max-width: 27em;
 		max-height: 27em;
@@ -108,8 +96,8 @@ page-lista-pacientes {
 
 	@media all and (min-width: 900px) { 
 		.div-lista-pacientes{  
-			width: 50%;
-			margin: 2em 25% 2em 25%;
+			width: 80%;
+			margin: 2em 10% 2em 10%;
 		} 
 	}
 
@@ -128,5 +116,11 @@ page-lista-pacientes {
 	    text-decoration:none; 
 		color: black;
 	} 
+
+	.img-lista{
+		background-color: #2b3d53;
+	    -webkit-border-radius: 50%;
+    	border-radius: 50%;
+	}
 
 }

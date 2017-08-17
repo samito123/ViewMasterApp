@@ -7,7 +7,6 @@
   $usuario = $angular_http_params["usuario"];
   $senha= $angular_http_params["senha"];
   $banco= $angular_http_params["banco"];
-  $foto= $angular_http_params["foto"];
   $paciente= json_decode($angular_http_params["paciente"], TRUE);
 
   $caminhoFoto;
@@ -33,18 +32,17 @@
       echo "Paciente com nome e sobrenome informado já está cadastrado!";
     }else{
       mysqli_free_result($result);
-      if($foto === "perfil"){
+      if($paciente['imagemPacienteBase64'] === "perfil"){
         $caminhoFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/perfil.png';
       }else{
         $nomeFoto = $paciente['nome'].date('Y-m-dH:i:s');
-        $caminhoFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/'.
-        $paciente['nome'].date('Y-m-dH:i:s').".png";
+        $caminhoFoto = 'http://br400.teste.website/~appot240/view_master_app/pacientesImg/'.$nomeFoto.".png";
       }
 
       $sql2="insert into tb_pacientes 
       (imagem_paciente, nome, sobrenome, telefone, data_de_nascimento, email)
       values ('".$caminhoFoto."', '".$paciente['nome']."', '".$paciente['sobrenome']."', 
-      '".$paciente['telefone']."', '".$paciente['dataDeNascimento']."', 
+      '".$paciente['telefone']."', '".$paciente['dataDeNascimentoBanco']."', 
       '".$paciente['email']."')";
       if (!mysqli_query($conexao, $sql2)) $erro_query++;
 
@@ -59,9 +57,11 @@
       
       if ($erro_query == 0){
         try{
-          if($foto !== "perfil"){
-            $foto = substr(explode(";",$foto)[1], 7);
-            file_put_contents('../pacientesImg/'.$nomeFoto.'.png', base64_decode($foto));
+          if($paciente['imagemPacienteBase64'] !== "perfil"){
+            $paciente['imagemPacienteBase64'] = 
+            substr(explode(";",$paciente['imagemPacienteBase64'])[1], 7);
+            file_put_contents('../pacientesImg/'.$nomeFoto.'.png', 
+            base64_decode($paciente['imagemPacienteBase64']));
           }
           mysqli_commit($conexao);
           echo "Paciente inserido com sucesso!";

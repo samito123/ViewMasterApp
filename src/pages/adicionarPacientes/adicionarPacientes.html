@@ -15,7 +15,7 @@
 				
 				<div text-center>	
 					<div>
-						<img class="img-perfil-paciente" src="{{imagemPaciente}}"
+						<img class="img-perfil-paciente" src="{{pacienteForm.img}}"
 						(click)="TirarFoto()"> 
 					</div>
 					<div>
@@ -31,7 +31,7 @@
 					<ion-input class="input" type="text" required maxlength="150"
 					placeholder="Exemplo: Luiz Samuel"
 					[(ngModel)]="pacienteForm.nome" name="nome"
-					(ionBlur)="FormataNomes('nome',pacienteForm.nome)">
+					(ionBlur)="FormataNome('nome',pacienteForm.nome)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('nome')">
@@ -44,7 +44,7 @@
 					<ion-input class="input" type="text" required maxlength="150"
 					placeholder="Exemplo: Pinheiro Lima"
 					[(ngModel)]="pacienteForm.sobrenome" name="sobrenome"
-					(ionBlur)="FormataNomes('sobrenome',pacienteForm.sobrenome)">
+					(ionBlur)="FormataNome('sobrenome',pacienteForm.sobrenome)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('sobrenome')">
@@ -57,7 +57,7 @@
 					<ion-input class="input" type="text"
 					placeholder="Exemplo: (85) 99804-4058"
 					[(ngModel)]="pacienteForm.telefone" name="telefone" maxlength="15"
-					(keyup)="MaskTelefone('telefone',pacienteForm.telefone)">
+					(keyup)="FormataTelefone('telefone',pacienteForm.telefone)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('telefone')">
@@ -71,7 +71,7 @@
 					placeholder="Exemplo: 22/08/1985"
 					[(ngModel)]="pacienteForm.dataDeNascimento" name="dataDeNascimento" 
 					maxlength="10"
-					(keyup)="MaskData('dataDeNascimento',pacienteForm.dataDeNascimento)">
+					(keyup)="FormataData('dataDeNascimento',pacienteForm.dataDeNascimento)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('dataDeNascimento')">
@@ -100,7 +100,7 @@
 					<ion-input class="input" type="text" maxlength="150"
 					placeholder="Exemplo: Av. Oliveira Paiva"
 					[(ngModel)]="pacienteForm.rua" name="rua"
-					(ionBlur)="FormataNomes('rua',pacienteForm.rua)">
+					(ionBlur)="FormataNome('rua',pacienteForm.rua)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('rua')">
@@ -113,7 +113,7 @@
 					<ion-input class="input" type="text" maxlength="100"
 					placeholder="Exemplo: Cidade Dos Funcionários"
 					[(ngModel)]="pacienteForm.bairro" name="bairro"
-					(ionBlur)="FormataNomes('bairro',pacienteForm.bairro)">
+					(ionBlur)="FormataNome('bairro',pacienteForm.bairro)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('bairro')">
@@ -138,7 +138,7 @@
 					<ion-input class="input" type="text" maxlength="50"
 					placeholder="Exemplo: Ap: 105 - Bloco 2"
 					[(ngModel)]="pacienteForm.complemento" name="complemento"
-					(ionBlur)="FormataNomes('complemento',pacienteForm.complemento)">
+					(ionBlur)="FormataNome('complemento',pacienteForm.complemento)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('complemento')">
@@ -151,7 +151,7 @@
 					<ion-input class="input" type="text" maxlength="9"
 					placeholder="Exemplo: 60831-415"
 					[(ngModel)]="pacienteForm.cep" name="cep"
-					(keyup)="MaskCep('cep',pacienteForm.cep)">
+					(keyup)="FormataCep('cep',pacienteForm.cep)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('cep')">
@@ -164,7 +164,7 @@
 					<ion-input class="input" type="text" maxlength="60"
 					placeholder="Exemplo: Fortaleza"
 					[(ngModel)]="pacienteForm.cidade" name="cidade"
-					(ionBlur)="FormataNomes('cidade',pacienteForm.cidade)">
+					(ionBlur)="FormataNome('cidade',pacienteForm.cidade)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('cidade')">
@@ -177,7 +177,7 @@
 					<ion-input class="input" type="text" maxlength="2"
 					placeholder="Exemplo: CE"
 					[(ngModel)]="pacienteForm.estado" name="estado"
-					(ionBlur)="FormataUpperCase('estado',pacienteForm.estado)">
+					(ionBlur)="FormataSigla('estado',pacienteForm.estado)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('estado')">
