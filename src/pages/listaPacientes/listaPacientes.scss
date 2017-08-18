@@ -70,18 +70,34 @@ page-lista-pacientes {
 	}
 
 	.div-center{
-		max-width: 27em;
-		max-height: 27em;
+		max-width: 250px;
+		max-height: 350px;
 		position: absolute;
-		top: 48%;
+		top: 50%;
 		left: 50%;
-		margin-top: -13.5em;
-		margin-left: -13.5em;
+		margin-top: -175px;
+		margin-left: -125px;
+	}
+
+	@media all and (min-width: 900px) { 
+		.div-center{  
+			max-width: 300px;
+			max-height: 400px;
+			margin-top: -200px;
+			margin-left: -150px;
+		} 
 	}
 
 	.img-usuario{
-		width: 27em;
-		height: 27em;
+		width: 250px;
+		height: 350px;
+	}
+
+	@media all and (min-width: 900px) { 
+		.img-usuario{
+			width: 300px;
+			height: 400px;
+		}
 	}
 
 	.img-usuario-mensagem{

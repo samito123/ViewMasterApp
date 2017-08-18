@@ -102,12 +102,13 @@ export class VisualizarPacientesPage {
 			quality: 100,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.PNG,
-			mediaType: this.camera.MediaType.PICTURE,
-			targetWidth: 350,
+			//mediaType: this.camera.MediaType.PICTURE,
+			targetWidth: 1000,
+			targetHeight: 1000
 		}
 
 		this.camera.getPicture(options).then((imageData) => {
-			let base64Image = 'data:image/jpeg;base64,' + imageData;
+			let base64Image = 'data:image/png;base64,' + imageData;
 			this.paciente['img'] = base64Image;
 			this.FormaNovoCaminhoFoto();
 			
