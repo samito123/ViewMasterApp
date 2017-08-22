@@ -10,22 +10,22 @@ import { Camera } from '@ionic-native/camera';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { LeftMenuPage } from '../pages/leftMenu/leftMenu';
-import { TabListaAddPacientesPage } from '../pages/tabs/tabListaAddPacientes/tabListaAddPacientes';
-import { PacientesPage } from '../pages/tabs/pacientes/pacientes';
-import { ListaPacientesPage } from '../pages/listaPacientes/listaPacientes';
-import { AdicionarPacientesPage } from '../pages/adicionarPacientes/adicionarPacientes';
-import { VisualizarPacientesPage } from '../pages/visualizarPacientes/visualizarPacientes';
+import { TabListaAddPacientesPage } from '../pages/pacientes/tabListaAddPacientes/tabListaAddPacientes';
+import { ListaPacientesPage } from '../pages/pacientes/listaPacientes/listaPacientes';
+import { AdicionarPacientesPage } from '../pages/pacientes/adicionarPacientes/adicionarPacientes';
+import { VisualizarPacientesPage } from '../pages/pacientes/visualizarPacientes/visualizarPacientes';
+import { TabVisualizarReceitaAgendamentoPacientePage } from '../pages/pacientes/tabVisualizarReceitaAgendamentoPaciente/tabVisualizarReceitaAgendamentoPaciente';
 
-@NgModule({
+@NgModule({ 
   declarations: [
     MyApp,
     LoginPage,
     LeftMenuPage,
     TabListaAddPacientesPage,
-    PacientesPage,
     ListaPacientesPage,
     AdicionarPacientesPage,
-    VisualizarPacientesPage
+    VisualizarPacientesPage,
+    TabVisualizarReceitaAgendamentoPacientePage
   ],
   imports: [
     BrowserModule,
@@ -38,10 +38,10 @@ import { VisualizarPacientesPage } from '../pages/visualizarPacientes/visualizar
     LoginPage,
     LeftMenuPage,
     TabListaAddPacientesPage,
-    PacientesPage,
     ListaPacientesPage,
     AdicionarPacientesPage,
-    VisualizarPacientesPage
+    VisualizarPacientesPage,
+    TabVisualizarReceitaAgendamentoPacientePage
   ],
   providers: [
     StatusBar,

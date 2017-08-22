@@ -4,9 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
-//import { PacientesPage } from '../tabs/pacientes/pacientes';
-//import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
-import { TabListaAddPacientesPage } from '../tabs/tabListaAddPacientes/tabListaAddPacientes';
+import { TabListaAddPacientesPage } from '../pacientes/tabListaAddPacientes/tabListaAddPacientes';
 
 @Component({
 	selector: 'page-left-menu',

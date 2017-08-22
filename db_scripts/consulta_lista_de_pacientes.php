@@ -10,6 +10,7 @@
   $pesquisar= $angular_http_params["pesquisar"];
   $offset= $angular_http_params["offset"];
   $limit= $angular_http_params["limit"];
+  $fk_usuario= $angular_http_params["fk_usuario"];
 
   $conexao = new mysqli('localhost',$usuario, $senha, $banco);
   $conexao->autocommit(FALSE);
@@ -27,6 +28,7 @@
       from tb_pacientes
       where ((nome LIKE '%$pesquisar%')
       or (telefone LIKE '%$pesquisar%'))
+      and fk_usuario = $fk_usuario
       order by nome asc
       limit 20 offset $offset";
     }else{
@@ -35,6 +37,7 @@
       from tb_pacientes
       where ((nome LIKE '%$pesquisar%')
       or (telefone LIKE '%$pesquisar%'))
+      and fk_usuario = $fk_usuario
       order by nome asc
       limit 0, $offset";
     }

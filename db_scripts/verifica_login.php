@@ -34,6 +34,7 @@
       $row_array['imagem_perfil'] = $dados['imagem_perfil']; 
       $row_array['nome'] = $dados['nome'];
       $row_array['sobrenome'] = $dados['sobrenome'];
+      $row_array['fk_usuario'] = $dados['fk_usuario'];
       
       array_push($return_array_json,$row_array);
     }

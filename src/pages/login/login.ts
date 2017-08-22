@@ -6,9 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 
-//import { PacientesPage } from '../tabs/pacientes/pacientes';
-//import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
-import { TabListaAddPacientesPage } from '../tabs/tabListaAddPacientes/tabListaAddPacientes';
+import { TabListaAddPacientesPage } from '../pacientes/tabListaAddPacientes/tabListaAddPacientes';
 
 @Component({
 	selector: 'page-login',
@@ -22,6 +20,8 @@ export class LoginPage {
 	url = 'http://br400.teste.website/~appot240/view_master_app/';
 	loader;
 	alert;
+
+	onDevice: boolean;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, 
 		public http: Http, public alertCtrl: AlertController, public events: Events) {
@@ -47,8 +47,7 @@ export class LoginPage {
 			.subscribe(data => {
 				this.TrataRetornoServidor(data);
 			}, error => {
-				this.ShowAlert("Ocorreu um erro!", "Erro: "+error);
-				this.EncerraLoading();
+				this.TrataErroServidor(error);
 		});
 	}
 
@@ -85,6 +84,20 @@ export class LoginPage {
 
 	RedirecionaParaListaDePacientes(){
   		this.navCtrl.setRoot(TabListaAddPacientesPage);
+  	}
+
+  	TrataErroServidor(error){
+  		this.ShowAlert("Sem conexão com a internet", 
+		"Por favor, verifique sua conexão com a internet e tente novamente!");	
+		this.EncerraLoading();
+  	}
+
+  	VerificaConexaoComInternet(){
+  		if (navigator.onLine) {
+		  console.log('online');
+		} else {
+		  console.log('offline');
+		}
   	}
 
 	InicializarLoading() { 

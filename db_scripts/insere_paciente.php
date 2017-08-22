@@ -24,7 +24,9 @@
     
     $sql1="select id
     from tb_pacientes
-    where nome = '".$paciente['nome']."' and sobrenome = '".$paciente['sobrenome']."'";
+    where nome = '".$paciente['nome']."' 
+    and sobrenome = '".$paciente['sobrenome']."'
+    and fk_usuario = '".$paciente['fk_usuario']."'";
 
     $result = $conexao->query($sql1);
     if($result->num_rows >= 1){
@@ -40,10 +42,10 @@
       }
 
       $sql2="insert into tb_pacientes 
-      (imagem_paciente, nome, sobrenome, telefone, data_de_nascimento, email)
+      (imagem_paciente, nome, sobrenome, telefone, data_de_nascimento, email, fk_usuario)
       values ('".$caminhoFoto."', '".$paciente['nome']."', '".$paciente['sobrenome']."', 
       '".$paciente['telefone']."', '".$paciente['dataDeNascimentoBanco']."', 
-      '".$paciente['email']."')";
+      '".$paciente['email']."', '".$paciente['fk_usuario']."')";
       if (!mysqli_query($conexao, $sql2)) $erro_query++;
 
       $fk_paciente = mysqli_insert_id($conexao); 

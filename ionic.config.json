@@ -1,5 +1,8 @@
 {
   "name": "ViewMaster",
   "app_id": "6d6aeeeb",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

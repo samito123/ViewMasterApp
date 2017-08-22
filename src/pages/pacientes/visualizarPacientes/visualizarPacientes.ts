@@ -27,7 +27,7 @@ export class VisualizarPacientesPage {
 		public toastCtrl: ToastController, public events: Events) {
 		
 		this.paciente['img'] = "./assets/icon/perfil.png";
-		this.idPaciente = navParams.get("idPaciente");
+		this.idPaciente = this.navParams.data;
 		this.InicializaVisualizacaoDePaciente();
 	}
 
@@ -451,7 +451,8 @@ export class VisualizarPacientesPage {
 	Toast(mensagem) {
 		let toast = this.toastCtrl.create({
 			message: mensagem,
-			duration: 3500
+			showCloseButton: true,
+      		closeButtonText: 'Ok'
 		});
 		toast.present();
 	}

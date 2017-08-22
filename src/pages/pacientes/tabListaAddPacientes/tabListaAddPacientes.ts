@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { NavParams } from 'ionic-angular';
 
-import { ListaPacientesPage } from '../../listaPacientes/listaPacientes';
-import { AdicionarPacientesPage } from '../../adicionarPacientes/adicionarPacientes';
+import { ListaPacientesPage } from '../listaPacientes/listaPacientes';
+import { AdicionarPacientesPage } from '../adicionarPacientes/adicionarPacientes';
 
 @Component({
 	selector: 'page-tab-lista-add-pacientes',
@@ -25,7 +25,7 @@ export class TabListaAddPacientesPage {
 		this.tab1 = ListaPacientesPage;
 		this.tab2 = AdicionarPacientesPage;
 		
-		this.titulo = "Pacientes";
+		this.titulo = "Lista de Pacientes";
 	}
 
 }

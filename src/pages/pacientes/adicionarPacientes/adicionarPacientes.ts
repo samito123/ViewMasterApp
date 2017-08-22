@@ -44,9 +44,15 @@ export class AdicionarPacientesPage {
 
 	SalvarPaciente(){
 		this.InicializarLoading();
+		this.SetFkUsuarioPaciente();
 		this.TrataImagemDePerfil();
 		this.TransformaDataParaFormatoDoBancoDeDados();
 		this.InserePaciente();
+	}
+
+	SetFkUsuarioPaciente(){
+		var usuario = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+		this.pacienteForm['fk_usuario'] = usuario[0].id;
 	}
 
 	TrataImagemDePerfil(){
@@ -89,6 +95,7 @@ export class AdicionarPacientesPage {
 
 	TrataRetornoServidor(data){
 		this.Toast(data);
+		if(data !== "Paciente com nome e sobrenome informado já está cadastrado!")
 		this.LimpaFormulario();
 		this.EncerraLoading();
 		this.events.publish('BuscarPacientesPorFiltro');
@@ -185,7 +192,8 @@ export class AdicionarPacientesPage {
 	Toast(mensagem) {
 		let toast = this.toastCtrl.create({
 			message: mensagem,
-			duration: 3500
+			showCloseButton: true,
+      		closeButtonText: 'Ok'
 		});
 		toast.present();
 	}
