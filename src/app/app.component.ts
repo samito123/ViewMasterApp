@@ -4,13 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LeftMenuPage } from '../pages/leftMenu/leftMenu'
+import { AdicionarReceitaPage } from '../pages/receitas/adicionarReceita/adicionarReceita';
 
 //import { VisualizarPacientesPage } from '../pages/visualizarPacientes/visualizarPacientes';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LeftMenuPage;
+  rootPage:any = AdicionarReceitaPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,) {
     platform.ready().then(() => {

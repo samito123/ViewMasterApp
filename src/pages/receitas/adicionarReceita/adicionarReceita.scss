@@ -1,0 +1,113 @@
+page-adicionar-receita {
+	.menu{
+		max-height: 2.5em;
+		color: white;
+	}
+
+	.background-receitas{
+		//background-color: #174361;
+		background-image: url('../assets/wallpapers/eye.png');
+	}
+
+	.div-adicionar-paciente{
+		background-color: #2b476a;
+		margin: 2em 1em 2em 1em;
+
+		font-family: serif;
+		color: white;
+		border-color:#cfcbcb;
+		border-radius: 14px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	@media all and (min-width: 900px) { 
+		.div-adicionar-paciente{  
+			width: 80%;
+			margin: 2em 10% 2em 10%;
+		} 
+	}
+
+	.div-titulo-topo{
+		margin: 0;
+		padding: 0.5em 0 0 0.5em;
+		border-radius: 14px 14px 0 0;
+		background-color: #2b3d53;
+	}
+
+	.div-titulo{
+		margin: 0;
+		padding: 0.25em 0 0.25em 0.5em;
+		background-color: #2b3d53;
+	}
+
+	.span-titulo{
+		font-size: 1em;
+	}
+
+	.span-descricao{
+		color: #d6e0f4;
+		font-size: 0.8em;
+	}
+
+	.div-input{
+		width: 100%;
+		height: 3em;
+		margin: 0 0 1.8em 0;
+		padding: 0;
+	}
+
+	.titulo-input{
+		padding: 0;
+		margin: 0
+	}
+
+	.input{	
+		width: 90%;
+		height: 100%;
+		padding:0;
+		float: left;
+	  	background-color: #e1e9f4;
+	  	color: black;
+	}
+
+	.input-radio{	
+		width: 100%;
+		height: 100%;
+		float: left;
+	  	background-color: #e1e9f4;
+	  	color: black;
+	}
+
+	.botao-limpar{
+		width: 10%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		border-radius: 0;
+		float: left;
+		background-color: #2b3d53;
+	}
+
+	.botao-limpar-img{
+		width: 9.5em;
+		height: 2em;
+		margin: 0 0 1em 0;
+		padding: 0;
+		border-radius: 0;
+		background-color: #2b3d53;
+	}
+
+	.div-botoes-formulario{
+		margin: 1em 0 0 0;
+	}
+
+	.salvar-formulario{
+		margin: 0 1em 1em 0;
+		background-color: #2b3d53;
+	}
+
+	.limpar-formulario{
+		margin: 0 0 1em 0;
+		background-color: #2b3d53;
+	}
+}

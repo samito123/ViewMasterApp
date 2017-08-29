@@ -18,7 +18,7 @@
 
   try{
     $erro_query = 0;
-    $sql="select p.id, p.imagem_paciente, p.nome, p.sobrenome, 
+    $sql="select p.id, p.nome, p.sobrenome, 
     p.telefone, p.data_de_nascimento, p.email, e.rua, e.bairro,
     e.numero, e.complemento, e.cep, e.cidade, e.estado 
     from tb_pacientes as p
@@ -30,7 +30,6 @@
     while($dados = $result->fetch_assoc())
     {
       $row_array['id'] = $dados['id'];
-      $row_array['imagem_paciente'] = $dados['imagem_paciente'];
       $row_array['nome'] = $dados['nome'];
       $row_array['sobrenome'] = $dados['sobrenome'];
       $row_array['telefone'] = $dados['telefone'];    

@@ -6,8 +6,10 @@ import { NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+//import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Events } from 'ionic-angular';
+//import { Platform } from 'ionic-angular';
+import { App } from 'ionic-angular';
 
 @Component({
 	selector: 'page-visualizar-pacientes',
@@ -23,10 +25,10 @@ export class VisualizarPacientesPage {
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
 		public navParams: NavParams, public http: Http, 
-		public camera: Camera, public alertCtrl: AlertController,
-		public toastCtrl: ToastController, public events: Events) {
+		public alertCtrl: AlertController, public toastCtrl: ToastController, 
+		public events: Events, private app: App) {
 		
-		this.paciente['img'] = "./assets/icon/perfil.png";
+		//this.paciente['img'] = "./assets/icon/perfil.png";
 		this.idPaciente = this.navParams.data;
 		this.InicializaVisualizacaoDePaciente();
 	}
@@ -56,12 +58,14 @@ export class VisualizarPacientesPage {
 
 	TrataRetornoServidorBuscaPacienteId(data){
 		this.SetDadosPaciente(data);
+		this.events.publish('SetTituloVisualizarReceitaAgendamentoPaciente', 
+		this.paciente['nome']);
 		this.EncerraLoading();
 	}
 
 	SetDadosPaciente(data){
 		this.paciente['id'] = data[0].id;
-		this.paciente['img'] = data[0].imagem_paciente;
+		/*this.paciente['img'] = data[0].imagem_paciente;
 		this.paciente['imagemPaciente'] = data[0].imagem_paciente;
 
 		this.paciente['caminhoFoto'] = 
@@ -70,7 +74,7 @@ export class VisualizarPacientesPage {
 			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");
 
 		this.paciente['nomeFotoFinal'] = data[0].imagem_paciente.replace(
-			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");
+			'http://br400.teste.website/~appot240/view_master_app/pacientesImg/',"");*/
 
 		this.paciente['nome'] = data[0].nome;
 		this.paciente['sobrenome'] = data[0].sobrenome;
@@ -97,14 +101,25 @@ export class VisualizarPacientesPage {
 		}
 	}
 
-	TirarFoto(){
+	/*TirarFoto(){
+		var width;
+		var heigth;
+
+		if(this.platform.is('core')){
+			width = 200;
+			heigth = 200;
+		}else{
+			width = 1000;
+			heigth = 1000;
+		}
+
 		const options: CameraOptions = {
 			quality: 100,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.PNG,
 			//mediaType: this.camera.MediaType.PICTURE,
-			targetWidth: 1000,
-			targetHeight: 1000
+			targetWidth: width,
+			targetHeight: heigth
 		}
 
 		this.camera.getPicture(options).then((imageData) => {
@@ -129,11 +144,11 @@ export class VisualizarPacientesPage {
 		.replace('/', '-').replace(' ', '');
 
 		this.paciente['nomeFotoFinal'] = this.paciente['nome']+stringData+".png";
-	}
+	}*/
 
 	EditarDado(campo, exemplo, qtdCaracteres, Formatacao, tipo){
 		let prompt = this.alertCtrl.create({
-			title: 'Editar '+campo,
+			title: 'Editar '+this.FormataCampoParaTexto(campo),
 			message: "Digite o valor que desejado com até "+qtdCaracteres+" caracteres.",
 			inputs: [
 				{
@@ -161,6 +176,60 @@ export class VisualizarPacientesPage {
 	      	]
 	    });
 	    prompt.present();
+	}
+
+	FormataCampoParaTexto(texto){
+		var textoFormatado;
+		switch(texto) {
+		    case "nome":
+		        textoFormatado = 'Nome';
+		        break;
+
+	        case "sobrenome":
+		        textoFormatado = 'Sobrenome';
+		        break;
+
+	        case "telefone":
+		        textoFormatado = 'Telefone';
+		        break;
+
+	        case "dataDeNascimento":
+		        textoFormatado = 'Dt. Nascimento';
+		        break;
+
+	        case "email":
+		        textoFormatado = 'Email';
+		        break;
+
+	        case "rua":
+		        textoFormatado = 'Rua/Avenida';
+		        break;
+
+	        case "bairro":
+		        textoFormatado = 'Bairro';
+		        break;
+
+	        case "numero":
+		        textoFormatado = 'Número';
+		        break;
+
+	        case "complemento":
+		        textoFormatado = 'Complemento';
+		        break;
+
+	        case "cep":
+		        textoFormatado = 'Cep';
+		        break;
+
+	        case "cidade":
+		        textoFormatado = 'Cidade';
+		        break;
+
+        	case "estado":
+		        textoFormatado = 'Estado';
+		        break;
+	    }
+	    return textoFormatado;
 	}
 
 	ValidaEdicaoDeDado(campo, exemplo, qtdCaracteres, Formatacao, tipo, data){
@@ -368,7 +437,7 @@ export class VisualizarPacientesPage {
 	}
 
 	FormataPacienteParaServidor(){	
-		this.FormataFoto();	
+		//this.FormataFoto();	
 		this.FormataEspacos('nome');
 		this.FormataEspacos('sobrenome');
 		this.FormataEspacos('telefone');
@@ -385,13 +454,13 @@ export class VisualizarPacientesPage {
 		this.FormataEspacos('estado');
 	}
 
-	FormataFoto(){
+	/*FormataFoto(){
 		if(this.paciente['img'] === this.paciente['imagemPaciente']){
 			this.paciente['imagemPacienteBase64'] = '0';
 		}else {
 			this.paciente['imagemPacienteBase64'] = this.paciente['img'];
 		}
-	}
+	}*/
 
 	FormataEspacos(campo){
 		this.paciente[campo] = this.paciente[campo].trim();
@@ -432,9 +501,58 @@ export class VisualizarPacientesPage {
 
 	TrataRetornoServidorEditarPaciente(data){
 		this.Toast(data);
-		this.paciente['nomeFoto'] = this.paciente['nomeFotoFinal'];
+		//this.paciente['nomeFoto'] = this.paciente['nomeFotoFinal'];
 		this.EncerraLoading();
 		this.events.publish('BuscarPacientesPorFiltro');
+	}
+
+	ConfirmaExcluirPaciente(){
+		let confirm = this.alertCtrl.create({
+			title: 'Excluir paciente',
+			message: 'Deseja realmente excluir o paciente '+
+			this.paciente['nome']+'?',
+	      	buttons: [
+				{
+					text: 'Não',
+					handler: data => {
+						
+					}
+				},
+        		{
+					text: 'Sim',
+					handler: data => {
+						this.InicializarLoading();
+						this.ExcluirPacienteBanco();
+					}
+				}
+	      	]
+	    });
+	    confirm.present();
+	}
+
+	ExcluirPacienteBanco(){
+		var headers = new Headers();
+	    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+	    let options = new RequestOptions({ headers: headers });
+	 
+	    let postParams = {
+			usuario: 'appot240_vm_app', senha: 'kD91(w0E1VlM', banco: 'appot240_view_master_app', 
+			idPaciente: this.paciente['id']
+	    }
+	    
+		this.http.post(this.url+'pacientes/excluir_paciente_id.php', postParams, options)
+			.subscribe(data => {
+				this.TrataRetornoServidorExcluirPaciente(data['_body']);
+			}, error => {
+				console.log(error);
+		});
+	}
+
+	TrataRetornoServidorExcluirPaciente(data){
+		this.Toast(data);
+		this.EncerraLoading();
+		this.events.publish('BuscarPacientesPorFiltro');
+		this.app.getRootNavs()[0].pop();
 	}
 
 	InicializarLoading() { 

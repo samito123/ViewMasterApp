@@ -6,7 +6,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Events } from 'ionic-angular';
 
 import { App } from 'ionic-angular';
-//import { VisualizarPacientesPage } from '../visualizarPacientes/visualizarPacientes';
 import { TabVisualizarReceitaAgendamentoPacientePage } from '../tabVisualizarReceitaAgendamentoPaciente/tabVisualizarReceitaAgendamentoPaciente';
 
 @Component({
@@ -83,11 +82,10 @@ export class ListaPacientesPage {
 		this.InicializarLoading();
 		this.offset = 0;
 		this.listaDePacientes = [];
-		console.log(this.pesquisar);
 		this.BuscaListaDePacientes();
 	}
 
-	ExpandirImagem(imagem){
+	/*ExpandirImagem(imagem){
 		this.imagemExpandida = imagem;
 		this.FadeIn(document.querySelector(
 			'.divImagemExpandidaPacientes'), "inline-block");
@@ -118,7 +116,7 @@ export class ListaPacientesPage {
 				requestAnimationFrame(fade);
 			}
 		})();
-	}
+	}*/
 
 	InicializarLoading() { 
 		this.loader = this.loadingCtrl.create({

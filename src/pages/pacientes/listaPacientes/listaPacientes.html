@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content class="background-pacientes">
-	<div class='divImagemExpandidaPacientes fade-in is-paused' 
+	<!--<div class='divImagemExpandidaPacientes fade-in is-paused' 
 	(click)="FecharImagemExpandida()">
 		<div class="div-center">
 			<img class="img-usuario" src="{{imagemExpandida}}" />
@@ -12,7 +12,7 @@
 				Toque para fechar
 			</p>
 		</div>
-	</div>
+	</div>-->
 
 	<div class="div-pesquisar">
 		<ion-input class="input-login" placeholder="Buscar por..." 
@@ -32,7 +32,7 @@
 				<ion-item class="item">
 					<a class="link-sem-decoracao" href="#" 
 					(click)="VisualizarPaciente(paciente.id)">
-						<h2>{{paciente.nome}} {{paciente.sobrenome}}</h2>
+						<h2>Nome: {{paciente.nome}} {{paciente.sobrenome}}</h2>
 						<p *ngIf="paciente.telefone !== ''">
 							Contato: {{paciente.telefone}}
 						</p>
@@ -47,12 +47,12 @@
 							Idade: Não Informado
 						</p>
 					</a>
-						<ion-thumbnail item-end>
-							<a class="link-sem-decoracao" 
-							(click)="ExpandirImagem(paciente.imagem_paciente)">
-								<img class="img-lista" src="{{paciente.imagem_paciente}}">
-							</a>
-						</ion-thumbnail>
+					<!--<ion-thumbnail item-end>
+						<a class="link-sem-decoracao" 
+						(click)="ExpandirImagem(paciente.imagem_paciente)">
+							<img class="img-lista" src="{{paciente.imagem_paciente}}">
+						</a>
+					</ion-thumbnail>-->
 				</ion-item>
 			</ion-list>
 		</div>

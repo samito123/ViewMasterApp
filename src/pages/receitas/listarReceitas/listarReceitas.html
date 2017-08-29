@@ -1,0 +1,33 @@
+<ion-header>
+	<ion-navbar class="menu" color="menu">
+  	</ion-navbar>
+</ion-header>
+
+<ion-content class="background-receitas">
+	
+	<div padding>
+		<div class="div-lista-receitas">
+			<ion-list *ngFor="let paciente of listaDePacientes">
+				<ion-item class="item">
+					<a class="link-sem-decoracao" href="#" 
+					(click)="VisualizarPaciente(paciente.id)">
+						<h2>Nome: {{paciente.nome}} {{paciente.sobrenome}}</h2>
+						<p *ngIf="paciente.telefone !== ''">
+							Contato: {{paciente.telefone}}
+						</p>
+						<p *ngIf="paciente.telefone === ''">
+							Contato: Não Informado
+						</p>
+
+						<p *ngIf="paciente.idade !== null">
+							Idade: {{paciente.idade}} anos
+						</p>
+						<p *ngIf="paciente.idade === null">
+							Idade: Não Informado
+						</p>
+					</a>
+				</ion-item>
+			</ion-list>
+		</div>
+	</div>
+</ion-content>

@@ -1,8 +1,5 @@
 <ion-header>
 	<ion-navbar class="menu" color="menu">
-		<ion-title>
-			<p>Voltar</p>
-		</ion-title>
   	</ion-navbar>
 </ion-header>
 
@@ -14,7 +11,7 @@
 
 		<div padding>
 			
-			<div text-center>	
+			<!--<div text-center>	
 				<img class="img-perfil-paciente" src="{{paciente.img}}"
 				(click)="TirarFoto()"> 
 			</div>
@@ -23,7 +20,7 @@
 				(click)="LimparImagem()">
 					<ion-icon name="ios-close" color="light"></ion-icon>
 				</button>
-			</div>
+			</div>-->
 
 			<div (click)="EditarDado('nome', 'Exemplo: Luiz Samuel', 
 			150, 'FormataNome', 'text')">
@@ -206,7 +203,8 @@
 			(click)="ConfirmaEditarPaciente()">
 				Salvar Alterações
 			</button>
-			<button type="button" class="limpar-formulario" ion-button>
+			<button type="button" class="limpar-formulario" ion-button
+			(click)="ConfirmaExcluirPaciente()">
 				Excluir
 			</button>
 		</div>

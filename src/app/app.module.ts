@@ -15,6 +15,8 @@ import { ListaPacientesPage } from '../pages/pacientes/listaPacientes/listaPacie
 import { AdicionarPacientesPage } from '../pages/pacientes/adicionarPacientes/adicionarPacientes';
 import { VisualizarPacientesPage } from '../pages/pacientes/visualizarPacientes/visualizarPacientes';
 import { TabVisualizarReceitaAgendamentoPacientePage } from '../pages/pacientes/tabVisualizarReceitaAgendamentoPaciente/tabVisualizarReceitaAgendamentoPaciente';
+import { ListarReceitasPage } from '../pages/receitas/listarReceitas/listarReceitas';
+import { AdicionarReceitaPage } from '../pages/receitas/adicionarReceita/adicionarReceita';
 
 @NgModule({ 
   declarations: [
@@ -25,7 +27,9 @@ import { TabVisualizarReceitaAgendamentoPacientePage } from '../pages/pacientes/
     ListaPacientesPage,
     AdicionarPacientesPage,
     VisualizarPacientesPage,
-    TabVisualizarReceitaAgendamentoPacientePage
+    TabVisualizarReceitaAgendamentoPacientePage,
+    ListarReceitasPage,
+    AdicionarReceitaPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { TabVisualizarReceitaAgendamentoPacientePage } from '../pages/pacientes/
     ListaPacientesPage,
     AdicionarPacientesPage,
     VisualizarPacientesPage,
-    TabVisualizarReceitaAgendamentoPacientePage
+    TabVisualizarReceitaAgendamentoPacientePage,
+    ListarReceitasPage,
+    AdicionarReceitaPage
   ],
   providers: [
     StatusBar,

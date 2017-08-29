@@ -3,9 +3,10 @@ import { NavController } from 'ionic-angular';
 
 import { LoadingController } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+//import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ToastController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
+//import { Platform } from 'ionic-angular';
 
 @Component({
 	selector: 'page-adicionar-pacientes',
@@ -19,13 +20,24 @@ export class AdicionarPacientesPage {
 	loader;
 
 	constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
-		public http: Http, public camera: Camera, public toastCtrl: ToastController, 
+		public http: Http, public toastCtrl: ToastController, 
 		public events: Events) {
 		
-		this.pacienteForm['img'] = "./assets/icon/perfil.png";
+		//this.pacienteForm['img'] = "./assets/icon/perfil.png";
 	}
 
-	TirarFoto(){
+	/*TirarFoto(){
+		var width;
+		var heigth;
+
+		if(this.platform.is('core')){
+			width = 200;
+			heigth = 200;
+		}else{
+			width = 1000;
+			heigth = 1000;
+		}
+
 		const options: CameraOptions = {
 			quality: 100,
 			destinationType: this.camera.DestinationType.DATA_URL,
@@ -40,12 +52,12 @@ export class AdicionarPacientesPage {
 		}, (err) => {
 
 		});
-	}
+	}*/
 
 	SalvarPaciente(){
 		this.InicializarLoading();
 		this.SetFkUsuarioPaciente();
-		this.TrataImagemDePerfil();
+		//this.TrataImagemDePerfil();
 		this.TransformaDataParaFormatoDoBancoDeDados();
 		this.InserePaciente();
 	}
@@ -55,13 +67,13 @@ export class AdicionarPacientesPage {
 		this.pacienteForm['fk_usuario'] = usuario[0].id;
 	}
 
-	TrataImagemDePerfil(){
+	/*TrataImagemDePerfil(){
 		if(this.pacienteForm['img'] === "./assets/icon/perfil.png"){
 			this.pacienteForm['imagemPacienteBase64'] = "perfil"; 
 		}else {
 			this.pacienteForm['imagemPacienteBase64'] = this.pacienteForm['img'];
 		}
-	}
+	}*/
 
 	TransformaDataParaFormatoDoBancoDeDados(){
 		try{
@@ -102,7 +114,7 @@ export class AdicionarPacientesPage {
 	}
 
 	LimpaFormulario(){
-		this.LimparImagem();
+		//this.LimparImagem();
 		this.LimparCampoForm('nome');
 		this.LimparCampoForm('sobrenome');
 		this.LimparCampoForm('telefone');
@@ -118,9 +130,9 @@ export class AdicionarPacientesPage {
 		this.LimparCampoForm('estado');
 	}
 
-	LimparImagem(){
+	/*LimparImagem(){
 		this.pacienteForm['img'] = "./assets/icon/perfil.png";
-	}
+	}*/
 
 	LimparCampoForm(campo){
 		this.pacienteForm[campo] = "";

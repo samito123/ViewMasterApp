@@ -1,0 +1,175 @@
+<ion-header>
+	<ion-navbar class="menu" color="menu">  
+	    <ion-title>
+	      <p>{{titulo}}</p>
+	    </ion-title>
+  	</ion-navbar>
+</ion-header>
+
+<ion-content class="background-receitas">
+	
+	<div class="div-adicionar-paciente">
+
+		<form (ngSubmit)="SalvarReceita()" ngNativeValidate>
+			
+			<h3 class="div-titulo-topo">Dados Pessoais</h3>
+			<div padding>	
+				<div>
+					<h3>
+						<span class="span-titulo">Nome: </span>
+						<span class="span-descricao" *ngIf="receitaForm.nome !== ''">
+							{{receitaForm.nome}}
+						</span>
+						<span class="span-descricao" *ngIf="receitaForm.nome === ''">
+							Não Informado
+						</span>
+					</h3>
+				</div>
+
+				<div>
+					<h3>
+						<span class="span-titulo">Sobrenome: </span>
+						<span class="span-descricao" *ngIf="receitaForm.sobrenome !== ''">
+							{{receitaForm.sobrenome}}
+						</span>
+						<span class="span-descricao" *ngIf="receitaForm.sobrenome === ''">
+							Não Informado
+						</span>
+					</h3>
+				</div>
+			</div>
+
+			<h3 class="div-titulo">Anamnese</h3>
+			<div padding>
+				<div class="div-input">
+					<p class="titulo-input">Sinais e Sintomas:</p>
+					<ion-input class="input" type="text" maxlength="300"
+					placeholder="Exemplo: Visão turva ao olhar de perto"
+					[(ngModel)]="receitaForm.sintomas" name="sintomas"
+					(ionBlur)="FormataNome('sintomas',receitaForm.sintomas)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('sintomas')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Antecedentes Pessoais/Familiares:</p>
+					<ion-input class="input" type="text" maxlength="300"
+					placeholder="Exemplo: O pai tem problema na visão"
+					[(ngModel)]="receitaForm.antecedentes" name="motivo"
+					(ionBlur)="FormataNome('antecedentes',receitaForm.antecedentes)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('antecedentes')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+			</div>
+
+
+			<h3 class="div-titulo">Receita</h3>
+			
+			<div padding>
+				<div class="div-input">
+					<p class="titulo-input">Usuario de RX:</p>
+					<ion-select class="input-radio" [(ngModel)]="receitaForm.rx" name="rx" 
+					cancelText="Cancelar" okText="Ok">
+						<ion-option value="Não">Não</ion-option>
+						<ion-option value="Óculos">Óculos</ion-option>
+				    </ion-select>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Bairro:</p>
+					<ion-input class="input" type="text" maxlength="100"
+					placeholder="Exemplo: Cidade Dos Funcionários"
+					[(ngModel)]="receitaForm.bairro" name="bairro"
+					(ionBlur)="FormataNome('bairro',receitaForm.bairro)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('bairro')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Número:</p>
+					<ion-input class="input" type="number" maxlength="6"
+					placeholder="Exemplo: 2504"
+					[(ngModel)]="receitaForm.numero" name="numero">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('numero')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Complemento:</p>
+					<ion-input class="input" type="text" maxlength="50"
+					placeholder="Exemplo: Ap: 105 - Bloco 2"
+					[(ngModel)]="receitaForm.complemento" name="complemento"
+					(ionBlur)="FormataNome('complemento',receitaForm.complemento)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('complemento')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Cep:</p>
+					<ion-input class="input" type="text" maxlength="9"
+					placeholder="Exemplo: 60831-415"
+					[(ngModel)]="receitaForm.cep" name="cep"
+					(keyup)="FormataCep('cep',receitaForm.cep)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('cep')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Cidade:</p>
+					<ion-input class="input" type="text" maxlength="60"
+					placeholder="Exemplo: Fortaleza"
+					[(ngModel)]="receitaForm.cidade" name="cidade"
+					(ionBlur)="FormataNome('cidade',receitaForm.cidade)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('cidade')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+
+				<div class="div-input">
+					<p class="titulo-input">Estado:</p>
+					<ion-input class="input" type="text" maxlength="2"
+					placeholder="Exemplo: CE"
+					[(ngModel)]="receitaForm.estado" name="estado"
+					(ionBlur)="FormataSigla('estado',receitaForm.estado)">
+					</ion-input>
+					<button type="button" class="botao-limpar" 
+					(click)="LimparCampoForm('estado')">
+						<ion-icon name="ios-close" color="light"></ion-icon>
+					</button>
+				</div>
+			</div>
+
+			<div class="div-botoes" text-center>
+				<button type="submit" class="salvar-formulario" ion-button>
+					Salvar
+				</button>
+				<button type="button" class="limpar-formulario" ion-button>
+					Limpar
+				</button>
+			</div>
+		
+	    </form>
+
+	</div>
+
+</ion-content>
