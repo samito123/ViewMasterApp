@@ -161,7 +161,7 @@ export class AdicionarPacientesPage {
 	FormataCep(campo, texto){
 		try{
 			this.pacienteForm[campo] = texto.replace( /\D/g, '' )
-	       	.replace( /^(\d{5})(\d)/g, '$1-$2')
+	       	.replace( /^(\d{5})(\d)/g, '$1-$2');
    		}catch(e){
 
 		}
