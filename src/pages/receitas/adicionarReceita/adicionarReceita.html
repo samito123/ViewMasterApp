@@ -10,7 +10,7 @@
 	
 	<div class="div-adicionar-paciente">
 
-		<form (ngSubmit)="SalvarReceita()" ngNativeValidate>
+		<form (ngSubmit)="ConfirmaSalvarReceita()" ngNativeValidate>
 			
 			<h3 class="div-titulo-topo">Dados Pessoais</h3>
 			<div padding>	
@@ -79,7 +79,7 @@
 					placeholder="Exemplo: 22/08/1985"
 					[(ngModel)]="receitaForm.dataConsulta" name="dataConsulta" 
 					maxlength="10"
-					(keyup)="FormataData('dataConsulta',receitaForm.dataConsulta)">
+					(ionBlur)="FormataData('dataConsulta',receitaForm.dataConsulta)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
 					(click)="LimparCampoForm('dataConsulta')">
@@ -99,7 +99,7 @@
 					    </ion-select>
 				    </ion-item>
 				    <button type="button" class="botao-limpar" 
-					(click)="LimparCampoForm('dataDeNascimento')">
+					(click)="LimparCampoForm('rx')">
 						<ion-icon name="ios-close" color="light"></ion-icon>
 					</button>
 				</div>
@@ -176,7 +176,7 @@
 				<div class="div-input">
 					<p class="titulo-input">Adição:</p>
 					<ion-input class="input" type="text"
-					placeholder="Exemplo: -2.00"
+					placeholder="Exemplo: 2.00"
 					[(ngModel)]="receitaForm.adicao" name="adicao" 
 					maxlength="10">
 					</ion-input>
@@ -189,9 +189,9 @@
 				<div class="div-input">
 					<p class="titulo-input">Tipo de Lente:</p>
 					<ion-input class="input" type="text"
-					placeholder="Exemplo: Convergente"
+					placeholder="Exemplo: Progressiva"
 					[(ngModel)]="receitaForm.tipoDeLente" name="tipoDeLente" 
-					maxlength="10"
+					maxlength="50"
 					(keyup)="FormataNome('tipoDeLente',receitaForm.tipoDeLente)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
@@ -205,7 +205,7 @@
 					<ion-input class="input" type="text"
 					placeholder="Exemplo: Verde"
 					[(ngModel)]="receitaForm.cor" name="cor" 
-					maxlength="10"
+					maxlength="30"
 					(keyup)="FormataNome('cor',receitaForm.cor)">
 					</ion-input>
 					<button type="button" class="botao-limpar" 
@@ -220,7 +220,8 @@
 				<button type="submit" class="salvar-formulario" ion-button>
 					Salvar
 				</button>
-				<button type="button" class="limpar-formulario" ion-button>
+				<button type="button" class="limpar-formulario" ion-button
+				(click)="ConfirmaLimparFormulario()">
 					Limpar
 				</button>
 			</div>

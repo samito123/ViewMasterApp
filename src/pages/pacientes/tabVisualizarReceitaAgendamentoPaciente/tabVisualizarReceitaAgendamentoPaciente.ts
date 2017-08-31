@@ -73,7 +73,8 @@ export class TabVisualizarReceitaAgendamentoPacientePage {
 	}
 
 	ChamarAdicionarReceita(){
-		this.app.getRootNavs()[0].push(AdicionarReceitaPage);
+		this.app.getRootNavs()[0].push(AdicionarReceitaPage, 
+		{idPaciente: this.idPaciente});
 	}
 
 	Toast(mensagem) {
